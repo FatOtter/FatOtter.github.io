@@ -58,40 +58,4 @@ img {
     visibility: visible;
 }
 
-/* Define scroll class effect*/
-@keyframes fadeIn {
-0% {
-    opacity: 0;
-}
-
-100% {
-    opacity: 1;
-}
-}
-
-.fadeIn {
-animation-name: fadeIn;
-}
-
-@keyframes fadeInLeft {
-0% {
-    opacity: 0;
-    transform: translate3d(-100%, 0, 0);
-}
-
-100% {
-    opacity: 1;
-    transform: none;
-}
-}
-
-.fadeInLeft {
-animation-name: fadeInLeft;
-}
-
-.animated {
-animation-duration: 1s;
-animation-fill-mode: both;
-}
-
 
