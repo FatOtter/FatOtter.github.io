@@ -37,4 +37,15 @@ $(document).ready(function(){
         $(this).parent().find("button").removeClass("selected");
         $(this).addClass("selected");
     });
+
+    $(".logo").hover(function(){
+        var timeout = setTimeout(function(){
+            $("body").addClass("inverted");
+        }, 2000);
+    }, function(){
+        clearTimeout(timeout);
+        console.log("hover off");
+        $("body").removeClass("inverted");
+    });
+
 });

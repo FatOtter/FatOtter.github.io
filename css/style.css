@@ -10,6 +10,7 @@ html {
 body {
     overflow-x: hidden;
     overflow-y: visible;
+    transition: cubic-bezier(0, -0.1, 0.2, 1) 2s;
 }
 
 /* typographic scheme */
@@ -44,6 +45,7 @@ img {
     z-index: -1;
     background-image: url("../image/Symmetry_background.jpg");
     background-position: center -0px;
+    
 }
 
 
@@ -95,6 +97,8 @@ img {
     background-color: rgb(230, 100, 100);
 }
 
+/*Define 3D effect for layer selector*/
+
 .layer_container {
     perspective: 400px;
 }
@@ -114,4 +118,17 @@ img {
 
 .base_layer.before_front {
     transform: translateZ(-100px) rotateY(30deg);
+}
+
+/*Add visual effects for invert*/
+.inverted {
+    filter: invert();
+}
+
+/*Handling the style of global header*/
+header {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
 }
