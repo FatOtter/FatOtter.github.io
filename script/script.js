@@ -57,6 +57,9 @@ $(document).ready(function(){
     $(".top_navigation").mousemove(function(event){
         var coordX = event.pageX;
         var window_width = $win.width();
+        if (window_width <= 768){
+            return;
+        }
         if (coordX < window_width/3) {
             $(".logo").removeClass("select_last");
             $(".logo").addClass("select_first");

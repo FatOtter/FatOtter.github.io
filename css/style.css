@@ -125,6 +125,37 @@ img {
     filter: invert();
 }
 
+/* hide reference section */
+#references {
+    display: none;
+}
+
+/* Define contact*/
+.contact {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+@media only screen and (min-width: 768px) {
+    .contact{
+        top: 25px;
+        left: 25px;
+        
+    }
+}
+
+.contact a{
+    display: flex;
+    align-items: center;
+}
+
+.contact a:last-of-type img{
+    width: 24px;
+    height: 24px;
+}
+
 /*Handling the style of global header*/
 @media only screen and (min-width: 768px) {
     header {
@@ -133,7 +164,6 @@ img {
         left: 50vw;
         transform: translate(-50%, -50%);
         width: 100vw;
-        height: 60vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -142,7 +172,7 @@ img {
     
     .logo {
         width: 40vw;
-        height: 30vh;
+        height: 50vh;
         padding: 3vh 0;
         display: flex;
         justify-content: center;
@@ -228,5 +258,23 @@ img {
         transition: 0.5s;
     }
 
+    .heading_title {
+        position: absolute;
+        top: 30vh;
+        width: 100vw;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .heading_title h1 {
+        padding:2vh 5vw ;
+        background: white;
+        color: black;
+        font-size: 2.3vw;
+    }
+
+    .heading_title h1:last-of-type {
+        text-align: right;
+    }
     
 }
