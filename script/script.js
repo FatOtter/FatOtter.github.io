@@ -38,14 +38,39 @@ $(document).ready(function(){
         $(this).addClass("selected");
     });
 
-    $(".logo").hover(function(){
-        var timeout = setTimeout(function(){
+    //control visual effect for hovering on logo
+    var timeout = null;
+
+    $(".top_navigation").hover(function(){
+        timeout = setTimeout(function(){
             $("body").addClass("inverted");
         }, 2000);
     }, function(){
         clearTimeout(timeout);
-        console.log("hover off");
         $("body").removeClass("inverted");
+        $(this).find(">ul").removeClass("select_first select_last");
+        $(".logo").removeClass("select_first select_last");
     });
 
+
+    //handle mouse move effect for top navigation
+    $(".top_navigation").mousemove(function(event){
+        var coordX = event.pageX;
+        var window_width = $win.width();
+        if (coordX < window_width/3) {
+            $(".logo").removeClass("select_last");
+            $(".logo").addClass("select_first");
+            $(this).find(">ul").removeClass("select_last");
+            $(this).find(">ul").addClass("select_first");
+        } else if (coordX > 2*window_width/3) {
+            $(".logo").removeClass("select_first");
+            $(".logo").addClass("select_last");
+            $(this).find(">ul").removeClass("select_first");
+            $(this).find(">ul").addClass("select_last");
+        } else {
+            $(".logo").removeClass("select_first select_last");
+            $(this).find(">ul").removeClass("select_first select_last");
+        };
+        
+    });
 });
