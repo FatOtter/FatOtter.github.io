@@ -15,6 +15,8 @@ function toggle_front(element){
 }
 
 $(document).ready(function(){
+
+    $("body").removeClass("inverted");
     
     // Add scroll class animation
     $(".animated").scrollClass();
