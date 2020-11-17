@@ -34,10 +34,28 @@ $(document).ready(function(){
         });
     });
 
+    //Handle language selection
+
+    var language_preference = "English";
+    language_preference = localStorage.getItem("rex_portfolio_language_preference");
+    if (language_preference == "Chinese") {
+        $(".Chinese").removeClass("no_display");
+        $(".English").addClass("no_display");
+    } 
+
     $(".language_selection button").click(function(){
         toggle_front($(this));
         $(this).parent().find("button").removeClass("selected");
         $(this).addClass("selected");
+        language_preference = $(this).data("language");
+        if (language_preference == "Chinese") {
+            $(".English").addClass("no_display");
+            $(".Chinese").removeClass("no_display");
+        } else if (language_preference == "English"){
+            $(".Chinese").addClass("no_display");
+            $(".English").removeClass("no_display");
+        };
+        localStorage.setItem("rex_portfolio_language_preference", language_preference);
     });
 
     //control visual effect for hovering on logo

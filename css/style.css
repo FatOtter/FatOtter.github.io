@@ -26,6 +26,16 @@ a, p, button{
     text-decoration: none;
 }
 
+.Chinese {
+    font-family: 'Noto Sans SC', sans-serif;
+}
+
+/*
+font-family: 'Noto Sans SC', sans-serif;
+font-family: 'ZCOOL QingKe HuangYou', cursive;
+font-family: 'ZCOOL XiaoWei', serif;
+*/
+
 a:hover {
     text-decoration: underline;
 }
@@ -60,6 +70,13 @@ img {
 }
 
 /*define language selection */
+.English.no_display {
+    display: none;
+}
+
+.Chinese.no_display {
+    display: none;
+}
 
 @media only screen and (min-width: 768px) {
     .language_selection {

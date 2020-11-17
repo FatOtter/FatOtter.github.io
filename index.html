@@ -7,6 +7,8 @@
         <link rel="stylesheet" href="./css/animate.css">
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=ZCOOL+QingKe+HuangYou&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
         <title>Rex's Portfolio</title>
         <script src="./script/jquery-3.5.1.min.js"></script>
         <script src="./script/scrollClass.js"></script>
@@ -21,27 +23,27 @@
                     <div class="logo"><img src="./image/logo_white.png"></div>
                     <nav class="top_navigation">
                         <ul>
-                            <li><a href="#about">ABOUT</a><p>01</p></li>
+                            <li><a href="#about"><span class="English">ABOUT</span><span class="Chinese no_display">个人信息</span></a><p>01</p></li>
                             
-                            <li><a href="#projects">PROJECTS</a><p>02</p></li>
+                            <li><a href="#projects"><span class="English">PROJECTS</span><span class="Chinese no_display">项目经历</span></a><p>02</p></li>
                             
-                            <li><a href="#skills">SKILLS</a><p>03</p></li>
+                            <li><a href="#skills"><span class="Chinese no_display">工作技能</span><span class="English">SKILLS</span></a><p>03</p></li>
                         </ul>
                     </nav>
                 </header>
                 <div class="heading_title animated hidden" data-scroll-class="visible fadeIn">
                     <div class="fullname">
-                    <h1>Liyue Shen </h1>
-                    <h1>Rex</h1>
+                    <h1><span class="English">Liyue Shen</span><span class="Chinese no_display">沈励钥</span> </h1>
+                    <h1><span class="English">Rex</span><span class="Chinese no_display">Rex</span></h1>
                     </div>
                     <div class="titles">
-                    <h1>Analyst </h1>
-                    <h1>Developer</h1>
+                    <h1><span class="English">Analyst</span><span class="Chinese no_display">分析师</span> </h1>
+                    <h1><span class="English">Developer</span><span class="Chinese no_display">开发者</span></h1>
                     </div>
                 </div>
                 <div class="language_selection layer_container">
-                    <button class="selected front_layer">English</button>
-                    <button class="base_layer after_front">中文</button>
+                    <button class="selected front_layer" data-language="English">English</button>
+                    <button class="base_layer after_front" data-language="Chinese">中文</button>
                     <div class="animation_lab">
                         <div class="border"></div>
                         <div class="border"></div>
