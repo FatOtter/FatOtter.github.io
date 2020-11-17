@@ -112,8 +112,8 @@ img {
         width: 50px;
         height: 50px;
         position: absolute;
-        top: 25px;
-        right: 25px;
+        top: 5px;
+        right: 10px;
         transform-style: preserve-3d;
         display: flex;
         align-items: center;
@@ -252,6 +252,11 @@ img {
 }
 
 /*Handling the style of global header*/
+
+.top_navigation a .Chinese {
+    font-family: 'ZCOOL XiaoWei', serif;
+}
+
 @media only screen and (min-width: 768px) {
     header {
         position: absolute;

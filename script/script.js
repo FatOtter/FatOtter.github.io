@@ -41,7 +41,10 @@ $(document).ready(function(){
     if (language_preference == "Chinese") {
         $(".Chinese").removeClass("no_display");
         $(".English").addClass("no_display");
-    } 
+        $(".language_selection button").removeClass("selected front_layer base_layer after_front");
+        $(".language_selection button:first-of-type").addClass("base_layer before_front");
+        $(".language_selection button:last-of-type").addClass("selected front_layer");
+    } ;
 
     $(".language_selection button").click(function(){
         toggle_front($(this));
