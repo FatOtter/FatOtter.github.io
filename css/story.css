@@ -1,6 +1,6 @@
-.main_frame {
+#background {
     background-image: url("../image/film_background.jpg");
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
@@ -12,4 +12,13 @@
 
 h1 {
     font-family: 'Satisfy', cursive;
+}
+
+li {
+    font-family: 'Satisfy', cursive;
+    font-size: large;
+}
+
+p {
+    font-family: 'Oooh Baby', cursive;
 }

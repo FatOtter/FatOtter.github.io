@@ -8,21 +8,84 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Oooh+Baby&family=Satisfy&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div class="main_frame" id="background">
+        <div id="background">
         </div>
-        <nav class="container text-center mt-5 row">
+        <nav class="container text-center mt-5 row fixed-top" id="header">
             <h1 class="col-lg-8">Our story</h1>
             <div class="col-lg-4">
-                <ul>
-                    <li>It's <span></span> seconds since we met</li>
-                    <li></li>
+                <ul class="text-start list-unstyled">
+                    <li>It's <span>2022-1-21</span></li>
+                    <li><span>12345</span> days <span>before</span> our relashionship</li>
                 </ul>
             </div>
         </nav>
-        <div>
+        <nav class="container text-center mt-5 row invisible">
+            <h1 class="col-lg-8">Our story</h1>
+            <div class="col-lg-4">
+                <ul class="text-start list-unstyled">
+                    <li>It's <span>2022-1-21</span></li>
+                    <li><span>12345</span> days <span>before</span> our relashionship</li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container main_block">
+            <div class="content_block row my-3">
+                <div class="col-lg-2"></div>
+                <div class="fig_block col-lg-4">
+                    <img class="shadow-lg img-thumbnail my-auto" src="./image/terminal.jpg">
+                </div>
+                <div class="text_block col-lg-4 my-auto">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores modi dolor repellendus cupiditate voluptatem nisi hic laborum possimus, id reprehenderit, dolores error quasi magnam fugit accusamus distinctio dolorem facere. Nulla.
+                    </p>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+
+            <div class="content_block row my-3">
+                <div class="col-lg-2"></div>
+                <div class="text_block col-lg-4 my-auto">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores modi dolor repellendus cupiditate voluptatem nisi hic laborum possimus, id reprehenderit, dolores error quasi magnam fugit accusamus distinctio dolorem facere. Nulla.
+                    </p>
+                </div>
+                <div class="fig_block col-lg-4">
+                    <img class="shadow-lg img-thumbnail my-auto" src="./image/terminal.jpg">
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+
+            <div class="content_block row my-3">
+                <div class="col-lg-2"></div>
+                <div class="fig_block col-lg-4">
+                    <img class="shadow-lg img-thumbnail my-auto" src="./image/terminal.jpg">
+                </div>
+                <div class="text_block col-lg-4 my-auto">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores modi dolor repellendus cupiditate voluptatem nisi hic laborum possimus, id reprehenderit, dolores error quasi magnam fugit accusamus distinctio dolorem facere. Nulla.
+                    </p>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
         </div>
     </body>
+    <script>
+        $(document).ready(function(){
+            var $win = $(window);
+
+            //control background parallax effect
+            $('#background').each(function(){
+                var scroll_speed = 3;
+                var $this = $(this);
+                $(window).scroll(function() {
+                    var bgScroll = -(($win.scrollTop() - $this.offset().top)/ scroll_speed);
+                    var bgPosition = 'center '+ bgScroll + 'px';
+                    $this.css({ backgroundPosition: bgPosition });
+                });
+            });
+        });
+    </script>
 </html>
