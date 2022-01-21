@@ -1,4 +1,4 @@
-#background {
+.background_block {
     background-image: url("../image/film_background.jpg");
     position: fixed;
     top: 0;
@@ -8,6 +8,7 @@
     z-index: -1;
     background-position: center -0px;
     background-size: cover;
+    background-repeat: repeat-y;
 }
 
 h1 {
