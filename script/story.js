@@ -16,7 +16,7 @@ $(document).ready(function(){
             var to_load = (current.position().top - scroll_top) / header_bottom
             if (to_load < 1) {
                 current.css("opacity", to_load);
-                console.log(current.css("opacity"));
+                // console.log(current.css("opacity"));
             }
         })
     });
