@@ -11,8 +11,12 @@
     background-repeat: repeat-y;
 }
 
-h1 {
+h1, h2 {
     font-family: 'Satisfy', cursive;
+}
+
+h3 {
+    font-family: 'Satisfy','Yuji Syuku', serif;
 }
 
 li {
@@ -21,5 +25,18 @@ li {
 }
 
 p {
-    font-family: 'Oooh Baby', cursive;
+    font-family: 'Oooh Baby', 'Yuji Syuku', cursive;
+}
+
+img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.content_block {
+    max-height: 30vh;
+}
+
+.fig_block {
+    max-height: 30vh;
 }

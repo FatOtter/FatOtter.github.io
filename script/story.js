@@ -42,6 +42,8 @@ $(document).ready(function(){
             var temp = (current.position().top - scroll_top) / header_bottom
             if (temp < 1) {
                 current.css("opacity", temp);
+            } else {
+                current.css("opacity", 1);
             }
 
             // Update calendar
@@ -49,11 +51,13 @@ $(document).ready(function(){
             temp = (current.position().top - scroll_top) / ($(window).height() / 2);
             if (temp < 1) {
                 $("#calendar").text(date_caption);
-                console.log(date_caption)
+                // console.log(date_caption)
             }
         });
         update_date_counter();
     });
 
     update_date_counter();
+
+    $(".content_block").last().find(".time_stamp").first().text(get_date_string())
 });
