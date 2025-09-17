@@ -1,0 +1,55 @@
+{
+  "project": {
+    "name": "FatOtter Portfolio",
+    "type": "static-website",
+    "description": "Personal portfolio website with bilingual support"
+  },
+  "rules": {
+    "html": {
+      "doctype": "html5",
+      "indent": 4,
+      "quote_style": "double",
+      "semantic_tags": true,
+      "lang_attribute": true
+    },
+    "css": {
+      "indent": 4,
+      "naming_convention": "snake_case",
+      "property_order": "alphabetical",
+      "semicolon": "always",
+      "quote_style": "single"
+    },
+    "javascript": {
+      "indent": 4,
+      "naming_convention": "camelCase",
+      "semicolon": "always",
+      "quote_style": "single",
+      "jquery_ready": true
+    }
+  },
+  "structure": {
+    "directories": {
+      "css": "css/",
+      "js": "script/",
+      "images": "image/",
+      "assets": "assets/"
+    },
+    "main_files": {
+      "index": "index.html",
+      "main_css": "css/style.css",
+      "main_js": "script/script.js"
+    }
+  },
+  "features": {
+    "responsive": true,
+    "multilingual": true,
+    "animations": true,
+    "jquery": true
+  },
+  "browser_support": {
+    "chrome": "60+",
+    "firefox": "55+",
+    "safari": "11+",
+    "edge": "16+"
+  }
+}

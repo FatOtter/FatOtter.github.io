@@ -3,6 +3,96 @@
     margin: 0;
 }
 
+/* ============================
+   First viewport reserved for hero (cover)
+   Keep existing hero implementation intact
+   ============================ */
+
+/* 封面容器：将首屏内容限制在第一个视口高度内 */
+.heading_page {
+    min-height: 100vh; /* 首屏占满一屏 */
+    position: relative; /* 保留现有绝对定位子元素的定位上下文 */
+    box-sizing: border-box;
+}
+
+/* 简历内容容器：从首屏之后再开始 */
+.resume_sections {
+    margin-top: 6rem;      /* 与首屏留出间隔，避免覆盖 */
+}
+
+/* 中大屏进一步拉开首屏与简历区块的距离，确保不与绝对定位header重叠 */
+@media (min-width: 768px) {
+    .resume_sections {
+        margin-top: 12rem;
+    }
+}
+
+/* 若存在更小屏，间距适当缩小以兼顾可视面积 */
+@media (max-width: 767px) {
+    .resume_sections {
+        margin-top: 8rem;
+    }
+}
+
+/* ============================
+   Resume sections vertical distribution
+   Evenly spread sections over long background
+   Non-intrusive: only targets .resume_sections scope
+   ============================ */
+
+.resume_sections {
+    /* create vertical rhythm and avoid overlap with hero area */
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+}
+
+/* Each section occupies a tall slice to spread across background */
+.resume_sections .section {
+    min-height: 80vh;          /* nearly a viewport height for clear separation */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 6rem 0 4rem;      /* top/bottom inner spacing */
+    box-sizing: border-box;
+}
+
+/* Headings and lists spacing for readability */
+.resume_sections .section h2 {
+    margin-bottom: 1rem;
+}
+
+.resume_sections .section ul {
+    margin-top: 0.5rem;
+}
+
+/* Reduce height on smaller devices to avoid excessive scrolling */
+@media (max-width: 1023px) {
+    .resume_sections .section {
+        min-height: 65vh;
+        padding: 4rem 0 3rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .resume_sections {
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+    }
+    .resume_sections .section {
+        min-height: 55vh;
+        padding: 3rem 0 2rem;
+        gap: 0.75rem;
+    }
+}
+
+/* Optional subtle separators to hint different background parts without altering bg */
+.resume_sections .section + .section {
+    margin-top: 3rem; /* extra gap between sections */
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 3rem;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -55,9 +145,84 @@ img {
     z-index: -1;
     background-image: url("../image/Symmetry_background.jpg");
     background-position: center -0px;
-    
 }
 
+/* ============================
+   Resume sections (from assets/resume.md)
+   Basic layout only; non-intrusive
+   ============================ */
+
+.resume_sections {
+    /* Create a centered, readable content column */
+    max-width: 1100px;
+    margin: 4rem auto 2rem auto; /* top spacing from hero section */
+    padding: 0 1.25rem;          /* small horizontal padding on mobile */
+    position: relative;          /* ensure internal absolute children won't escape */
+    z-index: 0;                  /* keep under any fixed overlays that might exist */
+}
+
+/* removed resume_summary paragraph styles */
+
+/* Section blocks */
+.resume_sections .section {
+    margin-top: 2.5rem;
+}
+
+.resume_sections h2 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+/* Lists for experience/projects/skills */
+.resume_sections ul {
+    list-style: none;
+    padding-left: 1.1rem;    /* slight indent to separate from headers */
+    margin: 0;
+}
+
+.resume_sections ul li {
+    position: relative;
+    margin: 0.75rem 0;
+    line-height: 1.6;
+    color: #ffffff;
+    opacity: 0.95;
+}
+
+/* Custom bullet */
+.resume_sections ul li::before {
+    content: "•";
+    position: absolute;
+    left: -1.1rem;
+    color: #ffffff;
+    opacity: 0.6;
+}
+
+/* Simple responsive tweaks */
+@media (min-width: 768px) {
+    .resume_sections {
+        padding: 0 2rem;
+        margin-top: 5rem;
+    }
+    .resume_sections h2 {
+        font-size: 1.75rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .resume_sections {
+        max-width: 1200px;
+        padding: 0 2.5rem;
+    }
+}
+
+/* Avoid overlap with potential parallax background:
+   ensure background elements stay behind content */
+.resume_sections,
+.resume_sections .section {
+    transform: translateZ(0); /* keep GPU contexts consistent with existing 3D styles */
+}
 
 /* Define global visiblity class */
 
