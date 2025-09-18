@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>沈励钥（Rex）· 个人主页</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- 高可读无衬线 + 中文搭配 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- 开源图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    :root{
+      --bg: #0b0f14;
+      --bg-soft:#0f1623;
+      --card:#121a28;
+      --text:#e8eef9;
+      --muted:#a9b4c5;
+      --primary:#7aa2ff;
+      --accent:#61dafb;
+      --purple:#a78bfa;
+      --cyan:#22d3ee;
+      --divider: rgba(255,255,255,.08);
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --max: 1100px;
+    }
+    *{box-sizing:border-box}
+    /* 背景：多重渐变 + 网格 + 噪点 */
+    html,body{
+      margin:0;
+      background:
+        radial-gradient(1200px 800px at 80% -10%, rgba(97,218,251,0.15), transparent),
+        radial-gradient(900px 600px at 10% 10%, rgba(167,139,250,0.12), transparent),
+        linear-gradient(180deg, rgba(6,10,16,0.9), rgba(10,14,20,0.96)),
+        var(--bg);
+      color:var(--text);
+      font-family: Inter, 'Noto Sans SC', system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+      position:relative;
+      min-height:100%;
+    }
+    /* 细微的网格背景（SVG data URI），不加载外部图片 */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px, 40px 40px;
+      mask-image: radial-gradient(60% 60% at 50% 20%, rgba(255,255,255,1), rgba(255,255,255,0.1));
+      pointer-events:none;
+      z-index:-1;
+    }
+    /* 漂浮的渐变圆形装饰 */
+    body::after{
+      content:"";
+      position:fixed; right:-120px; top:-160px; width:420px; height:420px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(34,211,238,.45), rgba(34,211,238,0) 60%),
+                  radial-gradient(circle at 70% 70%, rgba(167,139,250,.35), rgba(167,139,250,0) 65%);
+      filter: blur(30px);
+      pointer-events:none; z-index:-1;
+      animation: float 18s ease-in-out infinite alternate;
+    }
+    @keyframes float {
+      from { transform: translateY(0px) }
+      to   { transform: translateY(18px) }
+    }
+
+    a{color:var(--text); text-decoration: none}
+    a:hover{color:var(--accent)}
+    .wrapper{max-width:var(--max); margin:0 auto; padding:24px 20px 64px; position:relative}
+
+    /* 玻璃拟态芯片与按钮 */
+    .chip{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px;
+      border:1px solid var(--divider); border-radius:999px; color:var(--muted);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      backdrop-filter: blur(6px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px;
+      background: conic-gradient(from 180deg at 50% 50%, var(--primary), var(--cyan), var(--purple), var(--primary));
+      color:#001; font-weight:700; border:1px solid rgba(255,255,255,.08);
+      box-shadow: 0 10px 20px rgba(122,162,255,.25), inset 0 1px 0 rgba(255,255,255,.2);
+      transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover{filter:brightness(1.06); transform: translateY(-1px); box-shadow: 0 12px 24px rgba(122,162,255,.3)}
+    .grid{display:grid; gap:18px}
+
+    .section{
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid var(--divider); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px;
+      position:relative; overflow:hidden;
+    }
+    /* 卡片边缘霓虹描边 */
+    .section::before{
+      content:""; position:absolute; inset:-1px; border-radius:inherit;
+      background: linear-gradient(135deg, rgba(122,162,255,.15), rgba(34,211,238,.12), rgba(167,139,250,.10));
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      padding:1px; pointer-events:none;
+    }
+
+    .sec-title{display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 14px}
+    .sec-title h2{margin:0; font-size:22px; letter-spacing:.3px}
+    .sec-title .hint{color:var(--muted); font-size:14px}
+
+    /* 扫描线微动效标题条 */
+    .sec-title h2::after{
+      content:""; display:inline-block; height:12px; width:120px; margin-left:10px;
+      background: linear-gradient(90deg, rgba(122,162,255,.35), rgba(34,211,238,.35), rgba(167,139,250,.35));
+      mask-image: linear-gradient(90deg, transparent, #000 20% 80%, transparent);
+      vertical-align: middle; opacity:.7;
+      animation: scan 2.6s linear infinite;
+    }
+    @keyframes scan {
+      from { mask-position: 0 0 }
+      to   { mask-position: 200% 0 }
+    }
+
+    .kv{
+      display:flex; align-items:center; gap:20px; padding:24px;
+      border:1px solid var(--divider); border-radius:22px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow:var(--shadow); overflow:hidden; position:relative;
+    }
+    .kv::after{
+      content:""; position:absolute; right:-60px; bottom:-60px; width:240px; height:240px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(122,162,255,.35), rgba(122,162,255,0) 60%),
+                  radial-gradient(circle at 70% 70%, rgba(34,211,238,.25), rgba(34,211,238,0) 65%);
+      filter: blur(20px); pointer-events:none;
+    }
+
+    .kv .avatar{
+      /* 自适应圆形头像：尺寸随屏幕而变，保持正方形与圆形边框 */
+      width: clamp(72px, 9vw, 120px);
+      height: clamp(72px, 9vw, 120px);
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background: #0b0f14 url('./assets/protrait.png') center/cover no-repeat;
+      border: 2px solid var(--divider);
+      box-shadow: 0 6px 16px rgba(0,0,0,.35), 0 0 0 4px rgba(122,162,255,.08);
+      /* 附加保障（如将来使用 <img> 时可继承使用） */
+      overflow: hidden;
+      image-rendering: -webkit-optimize-contrast;
+    }
+    .kv h1{font-size:28px; margin:0 0 4px}
+    .kv .subtitle{color:var(--muted)}
+    .kv .actions{display:flex; gap:10px; flex-wrap:wrap}
+
+    .two-col{display:grid; grid-template-columns: 1.2fr .8fr; gap:18px}
+    .item{padding:14px; border-radius:12px; background:rgba(15,20,32,.6); border:1px solid var(--divider); box-shadow: inset 0 1px 0 rgba(255,255,255,.04)}
+    .item + .item{margin-top:10px}
+    .item h3{margin:0 0 6px; font-size:16px}
+    .meta{color:var(--muted); font-size:13px}
+    ul.clean{list-style:none; padding:0; margin:0}
+    ul.clean li{margin:10px 0; line-height:1.6}
+    .badge{display:inline-block; padding:6px 10px; border-radius:999px; background:linear-gradient(180deg, #0f1420, #0a0f18); border:1px solid var(--divider); color:#cfe1ff; font-size:13px; margin:4px 6px 0 0; box-shadow: inset 0 1px 0 rgba(255,255,255,.04)}
+    .pub{padding:10px 12px; border-radius:10px; background:linear-gradient(180deg, #0f1420, #0a0f18); border:1px solid var(--divider); margin:10px 0; box-shadow: inset 0 1px 0 rgba(255,255,255,.04)}
+
+    .foot{margin-top:26px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; color:var(--muted); font-size:14px}
+    .anchors{display:flex; gap:10px; flex-wrap:wrap}
+    .anchors a{padding:8px 12px; border:1px solid var(--divider); border-radius:10px; background:linear-gradient(180deg, #0f1420, #0a0f18); box-shadow: inset 0 1px 0 rgba(255,255,255,.04)}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .two-col{grid-template-columns:1fr}
+      .kv{flex-direction:column; text-align:center}
+      .kv .actions{justify-content:center}
+    }
+  </style>
+</head>
+<body>
+  <!-- 科技风装饰：渐变条带 -->
+  <div style="position:fixed; left:-120px; bottom:-120px; width:380px; height:380px; border-radius:50%;
+    background: radial-gradient(circle at 30% 30%, rgba(97,218,251,.35), rgba(97,218,251,0) 60%),
+                radial-gradient(circle at 70% 70%, rgba(167,139,250,.25), rgba(167,139,250,0) 65%);
+    filter: blur(26px); pointer-events:none; z-index:-1;"></div>
+
+  <div class="wrapper">
+    <!-- 顶部封面 -->
+    <section class="kv">
+      <div class="avatar" aria-label="Avatar"></div>
+      <div style="flex:1 1 auto">
+        <div style="display:flex; justify-content:flex-end; gap:8px; margin-bottom:6px">
+          <button id="lang-en" class="chip" type="button">English</button>
+          <button id="lang-zh" class="chip" type="button">中文</button>
+        </div>
+        <span class="chip" data-en="AI in Industry" data-zh="AI·智能制造"><i class="fa-solid fa-microchip"></i> AI·智能制造</span>
+        <h1 data-en="Liyue Shen (Rex)" data-zh="沈励钥（Rex）">沈励钥（Rex）</h1>
+        <div class="subtitle" data-en="Engineer · Business/Project Delivery · Data/Algorithm" data-zh="工程师 · 商业/项目交付 · 数据/算法">工程师 · 商业/项目交付 · 数据/算法</div>
+        <div class="foot">
+          <span><i class="fa-solid fa-phone"></i> +86 188-0173-4215</span>
+          <span>·</span>
+          <a href="mailto:Narcy188@outlook.com"><i class="fa-solid fa-envelope"></i> Narcy188@outlook.com</a>
+          <span>·</span>
+          <a href="https://fatotter.github.io/" target="_blank" rel="noreferrer noopener"><i class="fa-solid fa-link"></i> fatotter.github.io</a>
+          <span>·</span>
+          <a href="https://www.linkedin.com/in/liyue-shen-444132120/" target="_blank" rel="noreferrer noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn" href="#about" data-en="ABOUT" data-zh="关于我"><i class="fa-regular fa-id-card"></i> <span data-en="ABOUT" data-zh="关于我">关于我</span></a>
+        <a class="btn" href="#projects" data-en="PROJECTS" data-zh="项目"><i class="fa-solid fa-diagram-project"></i> <span data-en="PROJECTS" data-zh="项目">项目</span></a>
+        <a class="btn" href="#skills" data-en="SKILLS" data-zh="技能"><i class="fa-solid fa-screwdriver-wrench"></i> <span data-en="SKILLS" data-zh="技能">技能</span></a>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section" style="margin-top:18px">
+      <div class="sec-title">
+        <h2 data-en="About" data-zh="关于我"><i class="fa-regular fa-user"></i> <span data-en="About" data-zh="关于我">关于我</span></h2>
+        <div class="hint" data-en="Profile, Education, Experience" data-zh="个人简介、教育、经历">个人简介、教育、经历</div>
+      </div>
+      <div class="two-col">
+        <div class="item">
+          <h3 data-en="Profile" data-zh="个人简介">个人简介</h3>
+          <p style="margin:8px 0 0; color:var(--muted)">
+            <span data-en="Leverage solid technical background and extensive delivery experience to reduce communication costs, bridge technical and business teams, align cross-cultural teammates, and help grow individual capabilities."
+                  data-zh="希望能在新的岗位上，利用扎实的技术背景知识和丰富的项目实施经验，减少外部客户和内部团队的沟通成本，打通技术团队和业务团队之间的沟通障碍，让不同文化背景和工作习惯的同事在项目上形成合力，并培养团队成员的个人能力。">希望能在新的岗位上，利用扎实的技术背景知识和丰富的项目实施经验，减少外部客户和内部团队的沟通成本，打通技术团队和业务团队之间的沟通障碍，让不同文化背景和工作习惯的同事在项目上形成合力，并培养团队成员的个人能力。</span>
+          </p>
+        </div>
+        <div class="item">
+          <h3 data-en="Education" data-zh="教育经历">教育经历</h3>
+          <ul class="clean">
+            <li>
+              <div class="meta"><span data-en="2010.9 – 2014.7 · Fudan University · Bachelor" data-zh="2010.9 – 2014.7 · 复旦大学 · 本科">2010.9 – 2014.7 · 复旦大学 · 本科</span></div>
+              <span data-en="Communication Engineering" data-zh="通信工程专业">通信工程专业</span>
+            </li>
+            <li>
+              <div class="meta"><span data-en="2020.6 – 2022.7 · The University of Queensland · Master" data-zh="2020.6 – 2022.7 · 昆士兰大学 · 硕士">2020.6 – 2022.7 · 昆士兰大学 · 硕士</span></div>
+              <span data-en="Information Technology (Privacy attacks & defenses in federated learning)" data-zh="信息技术（联邦学习范式下的隐私窥探与防御）">信息技术（联邦学习范式下的隐私窥探与防御）</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:12px">
+        <div class="item">
+          <h3 data-en="Experience" data-zh="工作经历">工作经历</h3>
+          <ul class="clean">
+            <li>
+              <strong>AvePoint</strong> · <span data-en="Business Analyst / Implementation Manager" data-zh="商业分析师/实施经理">商业分析师/实施经理</span>
+              <div class="meta"><span data-en="2013.12–2014.7 (Shanghai) Intern; 2014.7–2017.8 (Singapore)" data-zh="2013.12–2014.7（上海）实习；2014.7–2017.8（新加坡）">2013.12–2014.7（上海）实习；2014.7–2017.8（新加坡）</span></div>
+              <span data-en="Competitive research; BI analysis on internal business data; delivery of Dynamics CRM/SharePoint/O365 solutions; requirements, agile delivery, UAT, and post-launch analytics."
+                    data-zh="竞争对手研究与企业内部业务数据的BI分析；负责微软 Dynamics CRM、SharePoint、O365 等 ToB 方案与实施；需求收集、敏捷交付、UAT、上线后数据分析。">竞争对手研究与企业内部业务数据的BI分析；负责微软 Dynamics CRM、SharePoint、O365 等 ToB 方案与实施；需求收集、敏捷交付、UAT、上线后数据分析。</span>
+            </li>
+            <li>
+              <strong>Fuji Xerox</strong> · <span data-en="Business Analyst" data-zh="商业分析师">商业分析师</span>
+              <div class="meta"><span data-en="2017.9–2018.4" data-zh="2017.9–2018.4">2017.9–2018.4</span></div>
+              <span data-en="Pre-sales solutioning; China-overseas coordination; software/labor outsourcing/device deployment proposals." data-zh="售前方案，中外团队沟通，软件/外包/设备部署方案设计。">售前方案，中外团队沟通，软件/外包/设备部署方案设计。</span>
+            </li>
+            <li>
+              <strong>Trax</strong> · <span data-en="Implementation Manager / Data Specialist" data-zh="实施经理/数据专家">实施经理/数据专家</span>
+              <div class="meta"><span data-en="2018.4–2020.2" data-zh="2018.4–2020.2">2018.4–2020.2</span></div>
+              <span data-en="Delivered retail CV/AI projects; BI configuration & development; market insight reporting." data-zh="零售图像识别项目落地，BI 配置与开发，市场洞察报告。">零售图像识别项目落地，BI 配置与开发，市场洞察报告。</span>
+            </li>
+            <li>
+              <strong>上海飞机制造/商飞智能</strong> · <span data-en="PM / Algorithm Engineer / Solutions Manager" data-zh="项目经理/算法工程师/解决方案经理">项目经理/算法工程师/解决方案经理</span>
+              <div class="meta"><span data-en="2022.7–Present (Dept. head, 10-person team)" data-zh="2022.7–至今（科室主任，10人团队）">2022.7–至今（科室主任，10人团队）</span></div>
+              <span data-en="Pre-sales and project delivery across industrial AI/digitalization." data-zh="售前方案与项目实施，覆盖工业智能/数字化领域。">售前方案与项目实施，覆盖工业智能/数字化领域。</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section" style="margin-top:18px">
+      <div class="sec-title">
+        <h2 data-en="Projects" data-zh="项目经验"><i class="fa-solid fa-diagram-project"></i> <span data-en="Projects" data-zh="项目经验">项目经验</span></h2>
+        <div class="hint" data-en="Selected projects across gov/retail/aviation/airport" data-zh="政务/零售/民机/机场等领域精选项目">政务/零售/民机/机场等领域精选项目</div>
+      </div>
+      <div class="grid">
+        <div class="item">
+          <h3><span data-en="Gov Social & Family Dev. System (Singapore)" data-zh="新加坡政府社会与家庭发展部业务系统">新加坡政府社会与家庭发展部业务系统</span></h3>
+          <div class="meta"><span data-en="150 person-years · 6 modules · 2200+ use cases · 2000+ pages documentation" data-zh="150人年；6大模块；2200+ Use Cases；2000+页英文文档">150人年；6大模块；2200+ Use Cases；2000+页英文文档</span></div>
+          <span data-en="Full-cycle delivery from bidding, requirements, dev, UAT to post-launch analytics; in-depth analysis on youth welfare data." data-zh="负责从应标方案、需求收集、系统开发、UAT到售后支持的全流程；对青少年福利数据进行分析并形成报告。">负责从应标方案、需求收集、系统开发、UAT到售后支持的全流程；对青少年福利数据进行分析并形成报告。</span>
+          <div style="margin-top:8px">
+            <span class="badge">Dynamics CRM</span>
+            <span class="badge">SharePoint</span>
+            <span class="badge">O365</span>
+            <span class="badge">Agile</span>
+          </div>
+        </div>
+
+        <div class="item">
+          <h3><span data-en="Shell China CV-based Market Insights" data-zh="壳牌中国视觉识别市场洞察">壳牌中国视觉识别市场洞察</span></h3>
+          <div class="meta"><span data-en="Shanghai/Xi'an/Huizhou · Multi-dimensional dashboards & ML models" data-zh="上海/西安/惠州等地 · 多维报表与算法模型">上海/西安/惠州等地 · 多维报表与算法模型</span></div>
+          <span data-en="Coordinated survey data; built CV pipeline (ingest, train, infer, feedback); designed store scoring with ML-optimized parameters." data-zh="协调问卷数据，构建图像识别流程（获取、训练、识别、回传），并建立门店评分机制（机器学习最优参数）。">协调问卷数据，构建图像识别流程（获取、训练、识别、回传），并建立门店评分机制（机器学习最优参数）。</span>
+          <div style="margin-top:8px">
+            <span class="badge">Computer Vision</span><span class="badge">ML</span><span class="badge">BI</span>
+          </div>
+        </div>
+
+        <div class="item">
+          <h3><span data-en="Intelligent Scheduling for Domestic Airliner" data-zh="某型号国产民机智能排产">某型号国产民机智能排产</span></h3>
+          <div class="meta"><span data-en="Python + Flask · GA/Simulation/MIP · Integrated MES/MOM" data-zh="Python + Flask · GA/仿真/整数规划 · 集成 MES/MOM">Python + Flask · GA/仿真/整数规划 · 集成 MES/MOM</span></div>
+          <span data-en="Modeled assembly constraints; proposed multiple algorithms and refactored code; delivered first industry-grade executable plan." data-zh="梳理装配约束与逻辑，提供多种算法策略并重构算法；落地首个行业级可执行生产计划。">梳理装配约束与逻辑，提供多种算法策略并重构算法；落地首个行业级可执行生产计划。</span>
+          <div style="margin-top:8px">
+            <span class="badge">Scheduling</span><span class="badge">Flask</span><span class="badge">MIP</span>
+          </div>
+        </div>
+
+        <div class="item">
+          <h3><span data-en="Prime Manufacturer Process Digitalization" data-zh="主制造商过程数字化">主制造商过程数字化</span></h3>
+          <div class="meta"><span data-en="Process board / value stream / data definition · Iterations & acceptance" data-zh="过程画板/价值流拆解/数据定义 · 迭代与验收">过程画板/价值流拆解/数据定义 · 迭代与验收</span></div>
+          <span data-en="Modeling tool aligned with airworthiness compliance; led proposal, application, implementation and acceptance." data-zh="建模工具对接适航认证标准；作为项目经理推进立项、申报、实施、验收全流程。">建模工具对接适航认证标准；作为项目经理推进立项、申报、实施、验收全流程。</span>
+          <div style="margin-top:8px">
+            <span class="badge">Process Modeling</span><span class="badge">Gov Compliance</span>
+          </div>
+        </div>
+
+        <div class="item">
+          <h3><span data-en="Digital Transformation of a Hub Airport Group" data-zh="某枢纽机场集团数字化转型">某枢纽机场集团数字化转型</span></h3>
+          <div class="meta"><span data-en="100+ person-years · Procurement & research · DES/Path simulation" data-zh="100+人年 · 采购与科研 · 离散事件/动线仿真">100+人年 · 采购与科研 · 离散事件/动线仿真</span></div>
+          <span data-en="Led overall planning; coordinated multi-dept needs; designed functional/data architecture ensuring module collaboration." data-zh="牵头整体策划与推进；协调多部门需求，设计科研系统功能/数据架构，确保模块协同。">牵头整体策划与推进；协调多部门需求，设计科研系统功能/数据架构，确保模块协同。</span>
+          <div style="margin-top:8px">
+            <span class="badge">Simulation</span><span class="badge">Aviation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section" style="margin-top:18px">
+      <div class="sec-title">
+        <h2 data-en="Skills" data-zh="技能与资格"><i class="fa-solid fa-screwdriver-wrench"></i> <span data-en="Skills" data-zh="技能与资格">技能与资格</span></h2>
+        <div class="hint" data-en="Tech stack, tools, certifications and languages" data-zh="技术栈、工具、证书与语言">技术栈、工具、证书与语言</div>
+      </div>
+      <div class="two-col">
+        <div>
+          <div class="item">
+            <h3><span data-en="Data & Engineering" data-zh="数据与工程">数据与工程</span></h3>
+            <p class="meta"><span data-en="Python (numpy, torch, keras, matplotlib), R, Matlab; JS/jQuery/Bootstrap, Java (SpringBoot), PHP (CodeIgniter)" data-zh="Python（numpy、torch、keras、matplotlib）、R、Matlab；JS/jQuery/Bootstrap、Java（SpringBoot）、PHP（CodeIgniter）">Python（numpy、torch、keras、matplotlib）、R、Matlab；JS/jQuery/Bootstrap、Java（SpringBoot）、PHP（CodeIgniter）</span></p>
+            <div>
+              <span class="badge">Python</span><span class="badge">PyTorch</span><span class="badge">Keras</span>
+              <span class="badge">Matplotlib</span><span class="badge">Java</span><span class="badge">SpringBoot</span>
+              <span class="badge">JavaScript</span><span class="badge">jQuery</span><span class="badge">Bootstrap</span>
+              <span class="badge">PHP</span><span class="badge">CodeIgniter</span>
+            </div>
+          </div>
+          <div class="item">
+            <h3><span data-en="Databases" data-zh="数据库">数据库</span></h3>
+            <p class="meta"><span data-en="MySQL, Postgres, Hive" data-zh="MySQL、Postgres、Hive">MySQL、Postgres、Hive</span></p>
+            <div>
+              <span class="badge">MySQL</span><span class="badge">Postgres</span><span class="badge">Hive</span>
+              <span class="badge">SQL</span>
+            </div>
+          </div>
+          <div class="item">
+            <h3><span data-en="Productivity" data-zh="工具">工具</span></h3>
+            <p class="meta"><span data-en="Office 365; Prototyping: Axure, Figma, Mastergo, Balsamiq, AI" data-zh="Office 365；原型工具：Axure、Figma、Mastergo、Balsamiq、AI">Office 365；原型工具：Axure、Figma、Mastergo、Balsamiq、AI</span></p>
+            <div>
+              <span class="badge">Office 365</span><span class="badge">Axure</span><span class="badge">Figma</span>
+              <span class="badge">Mastergo</span><span class="badge">Balsamiq</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="item">
+            <h3><span data-en="Certifications" data-zh="证书与方法">证书与方法</span></h3>
+            <ul class="clean">
+              <li><span data-en="PMP (Project Management Professional)" data-zh="PMP（项目管理专业人士资格）">PMP（项目管理专业人士资格）</span></li>
+              <li><span data-en="Agile methodologies, Lean Six Sigma" data-zh="敏捷开发理念、精益六西格玛">敏捷开发理念、精益六西格玛</span></li>
+            </ul>
+          </div>
+          <div class="item">
+            <h3><span data-en="Languages" data-zh="语言能力">语言能力</span></h3>
+            <ul class="clean">
+              <li><span data-en="English: working and business proficiency" data-zh="英语：工作语言，商务水平">英语：工作语言，商务水平</span></li>
+              <li><span data-en="Japanese: JLPT N2" data-zh="日语：N2">日语：N2</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section class="section" style="margin-top:18px">
+      <div class="sec-title">
+        <h2 data-en="Publications" data-zh="学术著作"><i class="fa-regular fa-file-lines"></i> 学术著作</h2>
+        <div class="hint" data-en="Federated learning: robustness, privacy and fairness" data-zh="联邦学习：鲁棒性、隐私与公平性">联邦学习：鲁棒性、隐私与公平性</div>
+      </div>
+      <div class="pub">
+        Better together: Attaining the triad of byzantine-robust federated learning via local update amplification
+        <div class="meta">Shen, Liyue; Zhang, Yanjun; Wang, Jingwei; Bai, Guangdong; ACSAC 2022</div>
+      </div>
+      <div class="pub">
+        Agramplifier: Defending federated learning against poisoning attacks through local update amplification
+        <div class="meta">Gong, Zirui; Shen, Liyue; ...; TIFS 2023</div>
+      </div>
+      <div class="pub">
+        Privacy-preserving and fairness-aware federated learning for critical infrastructure protection and resilience
+        <div class="meta">Zhang, Yanjun; Sun, Ruoxi; Shen, Liyue; ...; The Web Conference 2024</div>
+      </div>
+      <div class="pub">
+        AgrEvader: Poisoning membership inference against Byzantine-robust federated learning
+        <div class="meta">Zhang, Yanjun; Bai, Guangdong; ...; The Web Conference 2023</div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="foot">
+      <div class="anchors">
+        <a href="#about"><i class="fa-regular fa-id-card"></i> <span data-en="ABOUT" data-zh="关于我">关于我</span></a>
+        <a href="#projects"><i class="fa-solid fa-diagram-project"></i> <span data-en="PROJECTS" data-zh="项目">项目</span></a>
+        <a href="#skills"><i class="fa-solid fa-screwdriver-wrench"></i> <span data-en="SKILLS" data-zh="技能">技能</span></a>
+      </div>
+      <div style="margin-left:auto">
+        <span class="meta">© Rex · 沈励钥</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // 语言切换
+    (function(){
+      const KEY = 'rex_resume_lang';
+      const btnEN = document.getElementById('lang-en');
+      const btnZH = document.getElementById('lang-zh');
+      const applyLang = (lang) => {
+        // 遍历带 data-en / data-zh 的元素，填充对应文本
+        document.querySelectorAll('[data-en][data-zh]').forEach(el => {
+          el.textContent = el.getAttribute(lang === 'en' ? 'data-en' : 'data-zh');
+        });
+        // 高亮当前语言
+        if (btnEN && btnZH) {
+          if (lang === 'en') {
+            btnEN.style.background = 'linear-gradient(135deg, var(--primary), #5ac8fa)';
+            btnEN.style.color = '#001';
+            btnZH.style.background = '';
+            btnZH.style.color = 'var(--muted)';
+          } else {
+            btnZH.style.background = 'linear-gradient(135deg, var(--primary), #5ac8fa)';
+            btnZH.style.color = '#001';
+            btnEN.style.background = '';
+            btnEN.style.color = 'var(--muted)';
+          }
+        }
+        localStorage.setItem(KEY, lang);
+      };
+      const initLang = () => {
+        const saved = localStorage.getItem(KEY);
+        const lang = saved === 'en' || saved === 'zh' ? saved : 'zh';
+        applyLang(lang);
+      };
+      if (btnEN) btnEN.addEventListener('click', () => applyLang('en'));
+      if (btnZH) btnZH.addEventListener('click', () => applyLang('zh'));
+      initLang();
+    })();
+
+    // 小交互：滚动时为导航按钮高亮当前区块
+    (function(){
+      const links = Array.from(document.querySelectorAll('a[href^="#"]'));
+      const sections = links.map(a => {
+        const id = a.getAttribute('href').slice(1);
+        return document.getElementById(id);
+      }).filter(Boolean);
+
+      const onScroll = () => {
+        const y = window.scrollY + 120;
+        let active = -1;
+        for (let i=0;i<sections.length;i++){
+          const s = sections[i];
+          if (s.offsetTop <= y) active = i;
+        }
+        links.forEach((a,i)=>{
+          if (i===active) {
+            a.style.background = 'linear-gradient(135deg, var(--primary), #5ac8fa)';
+            a.style.color = '#001';
+          } else {
+            a.style.background = '#0f1420';
+            a.style.color = 'var(--text)';
+          }
+        });
+      };
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
+    })();
+  </script>
+</body>
+</html>
