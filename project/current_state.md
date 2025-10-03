@@ -23,10 +23,10 @@
 - 页面结构：单页首页（About / Projects / Skills / Publications / Footer），布局与样式均已实现；可直接在浏览器打开运行。
 - 样式与脚本拆分：已将原内联 style/script 抽离到 css/style.css 与 script/app.js，并在 index.html 正确引用。
 - 交互功能：
-  - 语言切换：支持中/英双语切换（data-zh / data-en + localStorage 记忆），按钮高亮状态随切换更新。
+  - 语言切换：支持中/英/日三语切换（data-zh / data-en / data-ja + localStorage 记忆），按钮高亮状态随切换更新，并含默认语言自动识别（含 ja）。
   - 滚动锚点高亮：为锚点链接在滚动时设置高亮样式。
   - 测试友好接口：在 app.js 暴露 window.__app.i18n 与 window.__app.scroll，便于单测直接调用。
-- 字体与图标：通过 CDN 引入 Google Fonts（Inter、Noto Sans SC）与 Font Awesome 6.5.x。Noto Sans JP 尚未接入。
+- 字体与图标：通过 CDN 引入 Google Fonts（Inter、Noto Sans SC、Noto Sans JP）与 Font Awesome 6.5.x；Noto Sans JP 已接入。
 - 配色与设计基调：
   - 现状：深色、冷静基调已具备；使用一组冷色渐变与阴影风格。
   - 需求对齐：requirements.md 已增加“颜色方案设计”规范（核心主色 --primary 及派生变量与交互映射）。样式变量尚未完全按新规范重构联动（见“差距”）。
@@ -36,8 +36,8 @@
 - 方式：静态编排。未实现运行时解析 assets/resume.md 自动渲染。
 
 ## 4. 多语言状态
-- 已实现：中文/英文切换、localStorage 记忆与按钮高亮。
-- 待补充：日文支持（data-ja 与 UI“日本語”按钮、Noto Sans JP 字体与默认语言自动识别 ja）。
+- 已实现：中文/英文/日文完整切换（data-zh/en/ja，UI 含“日本語”按钮），支持浏览器默认语言识别（含 ja）与 localStorage 记忆，按钮高亮联动。
+- 字体：已接入 Noto Sans JP，确保日文显示效果。
 
 ## 5. 聊天功能与后端
 - 前端：尚未有聊天 UI 组件与调用逻辑。
@@ -71,7 +71,7 @@
 - todo.md：根据 requirements 与 current_state 差异生成，含最新测试事项与实现状态（前端测试 Done；后端测试 Blocked）。
 
 ## 8. 与需求的差距（重点待办）
-- 多语言：未加入日文 data-ja/按钮；未接入 Noto Sans JP；默认语言对 ja 的识别未实现。
+- 多语言：已完成三语支持；可继续打磨术语与行文一致性（可选）。
 - 聊天与后端：未创建 backend/；未实现 /api/health 与 /api/chat/completions；未接入 MySQL 与配置管理；未做 CORS/限流/日志/统一错误。
 - 配色方案：尚未将 css/style.css 完整重构为“核心主色驱动、变量联动”的实现（需梳理 --primary 系列变量并统一交互态）。
 - 配置与可观测性：前端运行时配置通道（window.RUNTIME_CONFIG 或 config.json）未接入；调试日志开关未实现。
