@@ -1,0 +1,42 @@
+<!-- Frontend tests runner: open this file in a browser to run tests.
+No build needed; uses CDN Mocha + Chai (UMD).
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Frontend Tests</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/10.2.0/mocha.min.css">
+  <style>body{font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;padding:12px}</style>
+</head>
+<body>
+  <div id="mocha"></div>
+
+  <!-- Minimal DOM for app.js hooks -->
+  <div id="fixture" style="height:20000px">
+    <button id="lang-en">English</button>
+    <button id="lang-zh">中文</button>
+    <span id="i18n-text" data-en="Hello" data-zh="你好">你好</span>
+
+    <nav>
+      <a id="nav-a" href="#sec-a">A</a>
+      <a id="nav-b" href="#sec-b">B</a>
+    </nav>
+    <section id="sec-a" style="height:10px;margin-top:0"></section>
+    <section id="sec-b" style="height:10px;margin-top:15000px"></section>
+  </div>
+
+  <!-- App under test -->
+  <script src="../../script/app.js"></script>
+
+  <!-- Test libs (UMD/global) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/10.2.0/mocha.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.3.7/chai.min.js"></script>
+  <script>mocha.setup('bdd'); window.expect = chai.expect;</script>
+
+  <!-- Specs -->
+  <script src="./app.spec.js"></script>
+
+  <script>mocha.run();</script>
+</body>
+</html>
