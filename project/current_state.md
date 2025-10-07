@@ -24,6 +24,7 @@
 - 样式与脚本拆分：已将原内联 style/script 抽离到 css/style.css 与 script/app.js，并在 index.html 正确引用。
 - 交互功能：
   - 语言切换：支持中/英/日三语切换（data-zh / data-en / data-ja + localStorage 记忆），按钮高亮状态随切换更新，并含默认语言自动识别（含 ja）。
+  - 聊天：基础聊天 UI（输入/发送/清空/消息列表）已接入后端 REST（POST /api/chat/completions），错误与状态提示；前端配置来自 assets/config.json
   - 滚动锚点高亮：为锚点链接在滚动时设置高亮样式。
   - 测试友好接口：在 app.js 暴露 window.__app.i18n 与 window.__app.scroll，便于单测直接调用。
 - 字体与图标：通过 CDN 引入 Google Fonts（Inter、Noto Sans SC、Noto Sans JP）与 Font Awesome 6.5.x；Noto Sans JP 已接入。
@@ -41,8 +42,11 @@
 
 ## 5. 聊天功能与后端
 - 前端：尚未有聊天 UI 组件与调用逻辑。
-- 后端：backend/ 目录尚未创建；Flask + MySQL、/api/health、/api/chat/completions 等接口未实现。
-- 要求已在 requirements.md 明确（代理火山引擎、配置、限流、日志、持久化），当前为空白。
+- 后端：已创建 backend/ 并实现 Flask 最小服务：
+  - GET /api/health、GET /api/config/public、POST /api/chat/completions（代理火山引擎；支持 JSON 或 SSE）
+  - 配置文件（backend/config.json）优先加载，环境变量可覆盖；CORS_ORIGINS、VOLCENGINE_API_BASE、VOLCENGINE_ENABLE_SSE、DEFAULT_MODEL 等可配置
+  - 统一错误结构与基础日志；依赖清单与 README 已提供
+- 差距：未接入真实 AK/SK 签名；未实现持久化（MySQL）；未编写后端更多用例与限流策略；前端聊天 SSE 流式渲染与端到端验证待完善。
 
 ## 6. 测试设计与现状（新增）
 - 测试总体策略（已落地于 requirements.md，并部分实现）：
@@ -56,7 +60,7 @@
     - i18n 语言切换：默认中文、切换至英文并持久化、回切中文并校验按钮样式。
     - 滚动高亮：使用 setActiveByY 基于 DOM offsetTop 稳定断言 nav-a/nav-b 高亮。
   - 当前结果：全部用例通过（5/5）。
-- 后端测试（骨架已就绪，待服务即可运行）：
+- 后端测试（骨架已就绪，服务可运行）：
   - 运行方式：设置 BACKEND_URL 后，pytest 执行 test/backend/test_api.py。
   - 覆盖内容：/api/health 成功；/api/chat/completions 成功或明确错误码（未配置上游时可接受 4xx/5xx）；自动跳过未配置环境的场景。
   - 现状：后端未实现，处于 Blocked。
@@ -79,6 +83,7 @@
 - 部署与文档：后端启动与配置示例、数据库初始化脚本说明尚缺。
 
 ## 9. 运行与验证
-- 运行：直接打开根目录下 index.html，即可浏览页面。
-- 前端测试：打开 test/frontend/index.html 即可查看测试结果（当前全部通过）。
-- 后端测试：待 backend 实现后，设置 BACKEND_URL 后运行 pytest。
+- 前端运行：建议通过本地静态服务器（例如 python3 -m http.server 8080）打开站点；配置由 assets/config.json 管理
+- 前端测试：打开 test/frontend/index.html 即可查看测试结果（当前全部通过）
+- 后端运行：python backend/app.py（自动读取 backend/config.json）；健康检查 /api/health
+- 后端测试：设置 BACKEND_URL 后运行 pytest；当前后端最小服务已可运行（需配置上游）

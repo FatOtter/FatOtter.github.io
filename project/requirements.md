@@ -37,7 +37,7 @@
 - 字体与图标库：
   - Google Fonts：Inter、Noto Sans SC、Noto Sans JP（或等效可替代镜像），提供合理回退栈；
   - Font Awesome 6.5.x（或等效），仅加载必要图标。
-- 配置通道：支持 window.RUNTIME_CONFIG 或 config.json 的运行时配置注入（不改源码即可切换后端地址与参数）。
+- 配置通道：前端使用 assets/config.json；后端使用 backend/config.json（环境变量可覆盖）。不改源码即可切换后端地址与参数。
 
 - 配色与品牌色（新增，颜色方案设计）
   - 基调与饱和度：
@@ -80,7 +80,8 @@
 ## 6. 后端（backend/）
 - 技术栈：Python Flask。
 - 数据库：本地 MySQL；连接信息可配置（环境变量或配置文件），包含主机/端口/库名/用户/密码。
-- 目录：backend/ 为根；包含依赖清单与启动脚本（开发/生产）。
+- 目录：backend/ 为根；包含依赖清单、启动脚本（开发/生产）、配置文件：
+  - backend/config.json（优先）；提供 backend/config.example.json 模板；服务启动时自动加载覆盖默认配置
 - 接口（最低要求）：
   - POST /api/chat/completions：代理火山引擎聊天，处理鉴权/签名/超时/重试；返回 JSON 或 SSE。
   - GET /api/health：健康检查。

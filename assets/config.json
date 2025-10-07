@@ -1,0 +1,6 @@
+{
+  "backendUrl": "http://127.0.0.1:5001",
+  "model": "auto",
+  "temperature": 0.7,
+  "stream": false
+}
