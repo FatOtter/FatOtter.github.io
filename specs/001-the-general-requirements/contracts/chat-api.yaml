@@ -1,0 +1,182 @@
+openapi: 3.0.3
+info:
+  title: Portfolio Chat API
+  description: Optional backend API for portfolio website chat functionality
+  version: 1.0.0
+  contact:
+    name: Portfolio Owner
+    email: Narcy188@outlook.com
+
+servers:
+  - url: http://localhost:5001
+    description: Development server
+  - url: https://api.fatotter.github.io
+    description: Production server
+
+paths:
+  /api/health:
+    get:
+      summary: Health check endpoint
+      description: Returns the health status of the API service
+      operationId: getHealth
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "healthy"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2025-01-27T10:30:00Z"
+                  version:
+                    type: string
+                    example: "1.0.0"
+
+  /api/config/public:
+    get:
+      summary: Get public configuration
+      description: Returns non-sensitive configuration for frontend
+      operationId: getPublicConfig
+      responses:
+        '200':
+          description: Public configuration
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chatEnabled:
+                    type: boolean
+                    example: true
+                  maxMessageLength:
+                    type: integer
+                    example: 1000
+                  supportedLanguages:
+                    type: array
+                    items:
+                      type: string
+                    example: ["zh", "en", "ja"]
+
+  /api/chat/completions:
+    post:
+      summary: Send chat message
+      description: Send a message to the chat system and receive a response
+      operationId: sendChatMessage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  description: User message content
+                  example: "Tell me about your experience with machine learning"
+                  maxLength: 1000
+                sessionId:
+                  type: string
+                  description: Optional session ID for conversation context
+                  example: "session_12345"
+                language:
+                  type: string
+                  description: User's preferred language
+                  enum: ["zh", "en", "ja"]
+                  example: "en"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    description: Assistant response
+                    example: "I have extensive experience in machine learning, particularly in federated learning and privacy-preserving techniques."
+                  sessionId:
+                    type: string
+                    description: Session ID for context
+                    example: "session_12345"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2025-01-27T10:30:00Z"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: "INVALID_MESSAGE"
+        message:
+          type: string
+          description: Human-readable error message
+          example: "Message content is required and cannot be empty"
+        requestId:
+          type: string
+          description: Unique request identifier for debugging
+          example: "req_12345"
+        details:
+          type: object
+          description: Additional error details
+          example:
+            field: "message"
+            reason: "too_long"
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key for authentication (if required)
+
+security:
+  - ApiKeyAuth: []
+
+tags:
+  - name: Health
+    description: Service health and status
+  - name: Configuration
+    description: Public configuration endpoints
+  - name: Chat
+    description: Chat functionality endpoints

@@ -1,0 +1,25 @@
+﻿# FatOtter.github.io Development Guidelines
+
+Auto-generated from all feature plans. Last updated: 2025-10-08
+
+## Active Technologies
+- HTML5, CSS3, Vanilla JavaScript (ES6+), Python 3.8+ (Flask backend) + Flask, Mocha 10.2, Chai 4.3, Google Fonts (Inter, Noto Sans SC, Noto Sans JP), Font Awesome 6.5.x (001-the-general-requirements)
+
+## Project Structure
+```
+backend/
+frontend/
+tests/
+```
+
+## Commands
+cd src; pytest; ruff check .
+
+## Code Style
+HTML5, CSS3, Vanilla JavaScript (ES6+), Python 3.8+ (Flask backend): Follow standard conventions
+
+## Recent Changes
+- 001-the-general-requirements: Added HTML5, CSS3, Vanilla JavaScript (ES6+), Python 3.8+ (Flask backend) + Flask, Mocha 10.2, Chai 4.3, Google Fonts (Inter, Noto Sans SC, Noto Sans JP), Font Awesome 6.5.x
+
+<!-- MANUAL ADDITIONS START -->
+<!-- MANUAL ADDITIONS END -->
