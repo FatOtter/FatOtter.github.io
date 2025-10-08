@@ -2,5 +2,14 @@
   "backendUrl": "http://127.0.0.1:5001",
   "model": "auto",
   "temperature": 0.7,
-  "stream": false
+  "stream": false,
+  "maxMessageLength": 1000,
+  "supportedLanguages": ["zh", "en", "ja"],
+  "defaultLanguage": "zh",
+  "chatEnabled": true,
+  "debugMode": false,
+  "performance": {
+    "enableLazyLoading": true,
+    "cacheTimeout": 300000
+  }
 }

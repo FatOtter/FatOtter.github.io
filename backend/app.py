@@ -1,11 +1,20 @@
 import os
 import json
 import logging
+import uuid
 from typing import Dict, Any, Generator, Optional
 
 import requests
 from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
+
+# Coze API integration
+try:
+    from cozepy import COZE_CN_BASE_URL, Coze, TokenAuth, Message, ChatEventType
+    COZE_AVAILABLE = True
+except ImportError:
+    COZE_AVAILABLE = False
+    print("Warning: cozepy not available, using mock responses")
 
 # ------------------------------------------------------------------------------
 # Config
@@ -19,10 +28,16 @@ class Config:
     # CORS
     CORS_ORIGINS: str = os.getenv("CORS_ORIGINS", "*")
 
-    # Upstream Volcengine API (placeholders; do not commit secrets)
-    VOLCENGINE_API_BASE: str = os.getenv("VOLCENGINE_API_BASE", "").strip()  # e.g., https://open.volcengineapi.com
+    # Coze API Configuration
+    COZE_API_TOKEN: str = os.getenv("COZE_API_TOKEN", "cztei_llMVpoQe7Wy03GrvaiNgnf3fI0E09s6ko0KYvT10DaQfnTZeDemojOM6LGID3IqA7")
+    COZE_API_BASE: str = os.getenv("COZE_API_BASE", "https://api.coze.cn")
+    COZE_BOT_ID: str = os.getenv("COZE_BOT_ID", "7556964822257156146")
+    COZE_TIMEOUT_SEC: int = int(os.getenv("COZE_TIMEOUT_SEC", "30"))
+    
+    # Legacy Volcengine API (fallback)
+    VOLCENGINE_API_BASE: str = os.getenv("VOLCENGINE_API_BASE", "").strip()
     VOLCENGINE_CHAT_PATH: str = os.getenv("VOLCENGINE_CHAT_PATH", "/api/chat/completions")
-    VOLCENGINE_API_KEY: str = os.getenv("VOLCENGINE_API_KEY", "").strip()  # if using key-based auth
+    VOLCENGINE_API_KEY: str = os.getenv("VOLCENGINE_API_KEY", "").strip()
     VOLCENGINE_TIMEOUT_SEC: int = int(os.getenv("VOLCENGINE_TIMEOUT_SEC", "30"))
     VOLCENGINE_ENABLE_SSE: bool = os.getenv("VOLCENGINE_ENABLE_SSE", "false").lower() == "true"
 
@@ -98,6 +113,10 @@ def create_app() -> Flask:
             "upstreamConfigured": bool(app.config["VOLCENGINE_API_BASE"]),
             "enableSSE": app.config["VOLCENGINE_ENABLE_SSE"],
             "timeoutSec": app.config["VOLCENGINE_TIMEOUT_SEC"],
+            "cozeConfigured": bool(app.config["COZE_API_TOKEN"]),
+            "chatEnabled": True,
+            "maxMessageLength": 1000,
+            "supportedLanguages": ["zh", "en", "ja"],
             "defaults": {
                 "model": app.config["DEFAULT_MODEL"],
                 "temperature": app.config["DEFAULT_TEMPERATURE"],
@@ -123,6 +142,58 @@ def create_app() -> Flask:
         if api_key:
             headers["Authorization"] = f"Bearer {api_key}"
         return headers
+
+    def _init_coze_client():
+        """Initialize Coze client if available"""
+        if not COZE_AVAILABLE or not app.config["COZE_API_TOKEN"]:
+            return None
+        
+        try:
+            coze = Coze(
+                auth=TokenAuth(token=app.config["COZE_API_TOKEN"]),
+                base_url=app.config["COZE_API_BASE"]
+            )
+            return coze
+        except Exception as e:
+            logger.error(f"Failed to initialize Coze client: {e}")
+            return None
+
+    def _chat_with_coze(message: str, user_id: str, language: str = "zh") -> Dict[str, Any]:
+        """Chat with Coze API"""
+        coze = _init_coze_client()
+        if not coze:
+            raise RuntimeError("Coze client not available")
+        
+        try:
+            # Create user message
+            user_message = Message.build_user_question_text(message)
+            
+            # Stream chat response
+            response_text = ""
+            token_count = 0
+            
+            for event in coze.chat.stream(
+                bot_id=app.config["COZE_BOT_ID"],
+                user_id=user_id,
+                additional_messages=[user_message]
+            ):
+                if event.event == ChatEventType.CONVERSATION_MESSAGE_DELTA:
+                    response_text += event.message.content
+                elif event.event == ChatEventType.CONVERSATION_CHAT_COMPLETED:
+                    token_count = event.chat.usage.token_count
+            
+            return {
+                "response": response_text,
+                "usage": {
+                    "token_count": token_count
+                },
+                "model": "coze",
+                "language": language
+            }
+            
+        except Exception as e:
+            logger.error(f"Coze API error: {e}")
+            raise RuntimeError(f"Coze API error: {str(e)}")
 
     def _proxy_chat(body: Dict[str, Any]) -> requests.Response:
         base = app.config["VOLCENGINE_API_BASE"]
@@ -183,11 +254,41 @@ def create_app() -> Flask:
         except Exception:
             return _error(400, "Invalid JSON body")
 
-        # basic validation
-        if "messages" not in body or not isinstance(body["messages"], list):
-            return _error(400, "Missing or invalid 'messages' (array of chat history)")
+        # Enhanced validation for new API format
+        message = body.get("message", "").strip()
+        user_id = body.get("user_id", str(uuid.uuid4()))
+        language = body.get("language", "zh")
+        
+        # Validate message
+        if not message:
+            return _error(400, "Missing or empty message")
+        
+        if len(message) > 1000:
+            return _error(400, "Message too long (max 1000 characters)")
+        
+        # Validate language
+        supported_languages = ["zh", "en", "ja"]
+        if language not in supported_languages:
+            return _error(400, f"Unsupported language. Supported: {supported_languages}")
+        
+        # Try Coze API first, fallback to legacy
         try:
-            upstream_resp = _proxy_chat(body)
+            if COZE_AVAILABLE and app.config["COZE_API_TOKEN"]:
+                result = _chat_with_coze(message, user_id, language)
+                return jsonify(result)
+        except Exception as e:
+            logger.warning(f"Coze API failed, trying fallback: {e}")
+        
+        # Fallback to legacy API format
+        legacy_body = {
+            "messages": [{"role": "user", "content": message}],
+            "model": body.get("model", app.config["DEFAULT_MODEL"]),
+            "temperature": body.get("temperature", app.config["DEFAULT_TEMPERATURE"]),
+            "stream": body.get("stream", False)
+        }
+        
+        try:
+            upstream_resp = _proxy_chat(legacy_body)
         except RuntimeError as e:
             return _error(501, "Upstream not configured", {"hint": str(e)})
         except requests.Timeout:
