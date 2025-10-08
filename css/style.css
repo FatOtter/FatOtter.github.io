@@ -44,6 +44,9 @@ html,body{
     var(--bg);
   color:var(--text);
   font-family: Inter, 'Noto Sans JP', 'Noto Sans SC', system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  /* Enhanced multilingual typography support */
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
   position:relative;
   min-height:100%;
 }
@@ -217,6 +220,68 @@ ul.clean li{margin:10px 0; line-height:1.6}
 a:focus-visible, button:focus-visible, .chip:focus-visible{
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
+}
+
+/* Enhanced multilingual typography */
+[lang="zh-CN"], [lang="zh"] {
+  font-family: 'Noto Sans SC', Inter, system-ui, sans-serif;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+[lang="ja"] {
+  font-family: 'Noto Sans JP', Inter, system-ui, sans-serif;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+}
+
+[lang="en"] {
+  font-family: Inter, 'Noto Sans SC', 'Noto Sans JP', system-ui, sans-serif;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+/* Language-specific text rendering optimizations */
+h1, h2, h3, h4, h5, h6 {
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  text-rendering: optimizeLegibility;
+}
+
+/* Improved spacing for different languages */
+p, li, span {
+  word-spacing: normal;
+  hyphens: auto;
+}
+
+/* Language button enhancements */
+.nav-actions .chip {
+  transition: all 0.2s ease;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.nav-actions .chip[aria-pressed="true"] {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(108, 140, 255, 0.3);
+}
+
+/* Smooth language switching animation */
+[data-en], [data-zh], [data-ja] {
+  transition: opacity 0.15s ease;
+}
+
+/* Language-specific content adjustments */
+[lang="zh-CN"] .subtitle,
+[lang="zh"] .subtitle {
+  letter-spacing: 0.05em;
+}
+
+[lang="ja"] .subtitle {
+  letter-spacing: 0.03em;
+}
+
+[lang="en"] .subtitle {
+  letter-spacing: 0.02em;
 }
 
 /* Responsive */
