@@ -206,23 +206,59 @@ class Game {
     this.isActive = false;
     clearInterval(this.timerInterval);
     
+    const container = document.getElementById('game-msg');
+    container.innerHTML = ''; // Clear previous content
+
+    const msgDiv = document.createElement('div');
+    msgDiv.style.marginBottom = '20px';
+    msgDiv.innerText = message;
+    
+    const enterBtn = document.createElement('button');
+    enterBtn.id = 'game-enter-btn';
+    enterBtn.className = 'btn'; // Use global style
+    enterBtn.style.marginTop = '10px';
+    
     if (success) {
-      this.ui.msg.innerText = message;
-      this.ui.msg.style.color = '#10b981';
-      setTimeout(() => {
-        // Fade out overlay
-        this.overlay.style.transition = 'opacity 1s ease';
+      msgDiv.style.color = 'var(--success)';
+      enterBtn.innerText = "进入主页";
+    } else {
+      msgDiv.style.color = 'var(--error)';
+      enterBtn.innerText = "虽败犹荣，直接进入"; // Fail forward
+      
+      const retryBtn = document.createElement('button');
+      retryBtn.innerText = "不服再战";
+      retryBtn.className = 'chip';
+      retryBtn.style.marginRight = '10px';
+      retryBtn.onclick = () => {
+        container.innerHTML = `
+          <div><i class="fa-solid fa-gamepad"></i> Rex 的需求接住大作战</div>
+          <div style="font-size:1rem; font-weight:400; margin:10px 0; color:var(--muted)">
+            接住项目需求变强(胖)，漏掉需求会扣钱变瘦！<br>
+            目标：活过60秒 或 达到200斤<br>
+            失败：资金归零
+          </div>
+          <button id="game-start-btn">开始工作</button>
+        `;
+        document.getElementById('game-start-btn').className = 'btn';
+        document.getElementById('game-start-btn').onclick = () => {
+             document.getElementById('game-start-btn').style.display = 'none';
+             this.start();
+        };
+      };
+      container.appendChild(retryBtn);
+    }
+    
+    enterBtn.onclick = () => {
+        this.overlay.style.transition = 'opacity 0.8s ease';
         this.overlay.style.opacity = 0;
         setTimeout(() => {
           this.overlay.style.display = 'none';
-          document.querySelector('.wrapper').style.display = 'block'; // Show content
-        }, 1000);
-      }, 2000);
-    } else {
-      this.ui.msg.innerText = message + " 点击屏幕重试";
-      this.ui.msg.style.color = '#ef4444';
-      this.canvas.addEventListener('click', () => this.start(), { once: true });
-    }
+          document.querySelector('.wrapper').style.display = 'block';
+        }, 800);
+    };
+
+    container.prepend(msgDiv);
+    container.appendChild(enterBtn);
   }
 }
 
@@ -239,6 +275,7 @@ window.onload = () => {
     
     // Start Button
     const startBtn = document.getElementById('game-start-btn');
+    startBtn.className = 'btn'; // Apply global styling
     startBtn.addEventListener('click', () => {
         startBtn.style.display = 'none';
         game.start();
