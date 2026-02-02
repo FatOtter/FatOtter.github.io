@@ -12,8 +12,28 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <!-- 外部样式 -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/game.css">
 </head>
 <body>
+  <!-- Game Overlay -->
+  <div id="game-overlay">
+    <canvas id="game-canvas"></canvas>
+    <div class="game-ui-layer">
+      <div class="game-stat" id="score-weight">体重: 100斤</div>
+      <div class="game-stat" id="score-timer">60s</div>
+      <div class="game-stat" id="score-money">资金: ￥3000</div>
+    </div>
+    <div id="game-msg">
+      <div><i class="fa-solid fa-gamepad"></i> Rex 的需求接住大作战</div>
+      <div style="font-size:1rem; font-weight:400; margin:10px 0; color:#64748b">
+        接住项目需求变强(胖)，漏掉需求会扣钱变瘦！<br>
+        目标：活过60秒 或 达到200斤<br>
+        失败：资金归零
+      </div>
+      <button id="game-start-btn">开始工作</button>
+    </div>
+  </div>
+
   <!-- 全局导航 -->
   <header class="global-nav" aria-label="Global Navigation">
     <div class="nav-left">
@@ -290,5 +310,6 @@
 
   <!-- 外部脚本 -->
   <script src="script/app.js"></script>
+  <script src="script/game.js"></script>
 </body>
 </html>
