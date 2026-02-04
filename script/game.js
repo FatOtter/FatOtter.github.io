@@ -28,9 +28,25 @@ class Game {
 
     // Assets
     this.keywords = [
-      "Python", "AI", "PMP", "Java", "SQL", "BI", 
-      "Flask", "CV", "NLP", "Agile", "UAT", 
-      "MIP", "Data", "Cloud", "React", "Node"
+      // SGE (MSF) - Social & Family Dev
+      "SGE: CPLS", "Car Park Label",
+      "SGE: EIPIC", "Early Intervention",
+      "SGE: PPIP", "SGE: ATC", 
+      "SGE: DSP", "Disability Support",
+      
+      // APS (Aviation) - Intelligent Scheduling
+      "APS: Weekly Plan", "APS: Daily Schedule", // 周/日计划
+      "Constraint: OSP", "Constraint: Space", // 工艺/空间约束
+      "Res: Qualification", "Res: Tooling", // 资质/工装
+      "Data: MOM Integration", "KPI: Manpower Util", // 集成与指标
+      "Algo: Heuristic", "Algo: Rolling Horizon", // 算法类型
+      
+      // Retail / CV
+      "Shell: CV Pipeline", "Store Scoring",
+      "Trax: Retail AI", "Market Insight",
+      
+      // Airport
+      "Airport: Pax Flow", "Sim: Bottleneck"
     ];
     
     // Bindings
@@ -249,12 +265,17 @@ class Game {
     }
     
     enterBtn.onclick = () => {
-        this.overlay.style.transition = 'opacity 0.8s ease';
-        this.overlay.style.opacity = 0;
+        // Trigger exit animation
+        this.overlay.classList.add('hidden');
+        
+        // Trigger entrance animation for main content
+        // Small delay to sync with the "zoom in" feel
         setTimeout(() => {
-          this.overlay.style.display = 'none';
-          document.querySelector('.wrapper').style.display = 'block';
-        }, 800);
+          document.querySelector('.wrapper').classList.add('visible');
+        }, 100);
+        
+        // Stop rendering loop to save battery
+        this.isActive = false;
     };
 
     container.prepend(msgDiv);
@@ -268,6 +289,7 @@ window.onload = () => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('skip')) {
         document.getElementById('game-overlay').style.display = 'none';
+        document.querySelector('.wrapper').classList.add('visible');
         return;
     }
 

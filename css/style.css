@@ -79,7 +79,27 @@ body::after{
 
 a{color:var(--text); text-decoration: none}
 a:hover{color:var(--primary)}
-.wrapper{max-width:var(--max); margin:0 auto; padding:24px 20px 64px; position:relative}
+/* 初始状态：隐藏并下沉，准备进场 */
+.wrapper {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 24px 20px 64px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+  filter: blur(4px);
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), 
+              transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 0.8s ease;
+  will-change: opacity, transform, filter;
+}
+
+/* 进场状态：通过 JS 添加此 class */
+.wrapper.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
 
 /* 玻璃拟态芯片与按钮 */
 .chip{

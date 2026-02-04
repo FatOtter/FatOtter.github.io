@@ -13,6 +13,19 @@
   justify-content: center;
   font-family: Inter, 'Noto Sans SC', sans-serif;
   color: var(--text);
+  
+  /* Transition for exit animation */
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.8s;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 游戏退出时的状态 */
+#game-overlay.hidden {
+  opacity: 0;
+  transform: scale(1.1); /* 镜头推进效果 */
+  visibility: hidden;
+  pointer-events: none;
 }
 
 #game-canvas {
@@ -49,6 +62,8 @@
   display: flex;
   align-items: center;
   backdrop-filter: blur(8px);
+  /* Tech border glow */
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 4px 12px rgba(0,0,0,0.3);
 }
 
 #game-msg {
@@ -59,18 +74,25 @@
   z-index: 3;
   text-align: center;
   
-  /* Glassmorphism card */
-  background: rgba(18, 26, 40, 0.85);
+  /* Glassmorphism card - Enhanced HUD style */
+  background: rgba(18, 26, 40, 0.92);
   border: 1px solid var(--divider);
-  padding: 32px;
+  padding: 40px;
   border-radius: 24px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-  backdrop-filter: blur(12px);
+  box-shadow: 0 0 0 1px rgba(108,140,255,0.1), 0 20px 50px rgba(0,0,0,0.6);
+  backdrop-filter: blur(20px);
   max-width: 90%;
-  width: 400px;
+  width: 420px;
   
   /* Title style */
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--text);
+  
+  animation: hud-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes hud-pop {
+  from { opacity: 0; transform: translate(-50%, -40%) scale(0.95); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
