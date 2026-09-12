@@ -1,51 +1,17 @@
-<!-- Frontend tests runner: open this file in a browser to run tests.
-No build needed; uses CDN Mocha + Chai (UMD).
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Frontend Tests</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/10.2.0/mocha.min.css">
-  <style>body{font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;padding:12px}</style>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Portfolio browser tests</title>
+  <style>body{font:16px/1.7 system-ui,sans-serif;margin:30px;max-width:960px}iframe{width:100%;height:500px;border:1px solid #aaa}.pass{color:#195b27}.fail{color:#a00000}</style>
 </head>
 <body>
-  <div id="mocha"></div>
-
-  <!-- Minimal DOM for app.js hooks -->
-  <div id="fixture" style="height:20000px">
-    <button id="lang-en">English</button>
-    <button id="lang-zh">中文</button>
-    <span id="i18n-text" data-en="Hello" data-zh="你好">你好</span>
-
-    <nav>
-      <a id="nav-a" href="#sec-a">A</a>
-      <a id="nav-b" href="#sec-b">B</a>
-    </nav>
-    <section id="sec-a" style="height:10px;margin-top:0"></section>
-    <section id="sec-b" style="height:10px;margin-top:15000px"></section>
-  </div>
-
-  <!-- App under test -->
-  <script src="../../script/app.js"></script>
-
-  <!-- Test libs (UMD/global) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/10.2.0/mocha.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.3.7/chai.min.js"></script>
-  <script>mocha.setup('bdd'); window.expect = chai.expect;</script>
-
-    <!-- Specs -->
-    <script src="./app.spec.js"></script>
-    <script src="./test_professional_info.js"></script>
-    <script src="./test_navigation.js"></script>
-    <script src="./test_contact_access.js"></script>
-    <script src="./test_language_switching.js"></script>
-    <script src="./test_language_persistence.js"></script>
-    <script src="./test_multilingual_content.js"></script>
-    <script src="./test_chat_ui.js"></script>
-    <script src="./test_chat_messages.js"></script>
-    <script src="./test_chat_errors.js"></script>
-
-  <script>mocha.run();</script>
+  <h1>Portfolio browser tests</h1>
+  <p>Serve the repository locally and open this page. No CDN or test packages required.</p>
+  <p id="status" role="status">Running…</p>
+  <ol id="results"></ol>
+  <iframe id="portfolio" title="Portfolio under test" src="../../index.html"></iframe>
+  <script src="app.spec.js"></script>
 </body>
 </html>
