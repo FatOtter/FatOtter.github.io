@@ -1,62 +1,39 @@
-# FatOtter.github.io
+# Rex — Digital & AI Delivery Portfolio
 
-A pure front-end personal homepage that includes multilingual support (zh/en/ja), resume content, and testing scaffolds. Optional backend (Flask) is planned for Volcengine chat proxy.
-
-## Project Structure
-- index.html — main page
-- css/style.css — styles
-- script/app.js — scripts
-- assets/ — static assets (e.g., resume.md, images)
-- project/ — product docs
-  - requirements.md — canonical requirements checklist
-  - current_state.md — current implementation status (non-archive)
-  - todo.md — task list derived from requirements vs. current state
-- test/
-  - frontend/ — Mocha + Chai browser-run tests
-  - backend/ — pytest integration tests (for backend when available)
-- archive/ — old materials (excluded from current implementation status)
+A client-facing, monochrome portfolio for Liyue Shen (Rex), built with plain HTML, CSS and JavaScript. Chinese, English and Japanese are supported. The page includes current expertise, anonymized recent work, six historical cases, professional experience, education, skills, four publications and direct contact links.
 
 ## Run
-- Frontend: open index.html in a modern browser.
-- Frontend tests: open test/frontend/index.html in a browser.
-- Backend tests: set BACKEND_URL and run pytest (requires a backend to exist).
 
-## How to contribute
-This repository follows a documentation-driven workflow centered on the project folder.
+Open `index.html` directly, or serve it locally:
 
-1) Update requirements
-- Edit project/requirements.md to reflect requested features and constraints only (as a checklist).
-- Keep it concise and implementation-agnostic.
+```sh
+python3 -m http.server 8080 --bind 127.0.0.1
+```
 
-2) Compare and list TODO
-- Read project/current_state.md to understand what’s already implemented (exclude archive/).
-- Derive all gaps by comparing requirements.md vs. current_state.md.
-- Add every task to project/todo.md with clear status:
-  - Status values: Todo / In Progress / Done / Blocked
-  - Prefer small, verifiable items
+Visit `http://127.0.0.1:8080`. There is no build step, CDN, analytics, model API or backend request. Without JavaScript, the Chinese content, native case disclosures and contact links remain usable. The résumé link opens the complete Chinese résumé.
 
-3) Implement code
-- Make minimal, targeted changes; follow existing patterns and code style.
-- Keep the front-end stack pure (HTML/CSS/JS). If a backend is needed, expose a configurable REST URL (do not hardcode secrets).
-- Respect the project structure (css/, script/, test/, project/).
-- For i18n: use data-zh/data-en/data-ja attributes and localStorage to persist language.
+## Structure
 
-4) Run tests
-- Frontend: run test/frontend/index.html in a browser; ensure all tests pass.
-- Backend (if present): run pytest under test/backend/.
-- Add or update tests to cover new logic where reasonable.
+- `index.html`: static content; translations use `data-zh/en/ja` attributes.
+- `css/style.css`: responsive monochrome design, CSS color variables, focus and reduced-motion support.
+- `script/app.js`: language selection/persistence, metadata and navigation state.
+- `assets/resume.md`: full public résumé, with current anonymized experience.
+- `project/`: requirements, actual implementation state, task status and verification record.
+- `test/frontend/`: dependency-free browser tests against the actual page.
+- `archive/`, `script/game.js`, `css/game.css`, other existing assets and `backend/`: retained historical/independent material. The homepage does not load the game or backend. Backend operation was not evaluated as part of the portfolio redesign.
 
-5) Update project docs
-- Update project/current_state.md to reflect the latest implementation state.
-- Update project/todo.md to set accurate statuses (mark completed items Done).
-- Ensure requirements.md stays the single source of truth for requirements.
+## Validate
 
-6) Commit
-- Commit code and doc updates together in a single coherent change set.
-- Do not include secrets. Use environment variables/config for runtime settings.
+While serving locally, open `http://127.0.0.1:8080/test/frontend/index.html`. The test page reports 12 checks, including all three languages, metadata, saved preference, fallbacks, navigation, native disclosures, retained content and external links. It requires no test libraries or network access.
 
-## Coding Guidelines
-- Accessibility: visible focus, adequate contrast (WCAG AA), semantic HTML.
-- Style: all colors via CSS variables; interactive states (hover/active/focus) derive from --primary.
-- Security: rel="noopener noreferrer" on external target=_blank links; never commit keys.
-- Config: support runtime-injected configs (e.g., window.RUNTIME_CONFIG or a config.json).
+The additional browser review is recorded in `project/verification.md`. It covers desktop/mobile layouts, keyboard interaction, storage failures and JavaScript-disabled operation. Automated accessibility checks complement visual review; they are not a formal accessibility certification.
+
+## Contribution workflow
+
+1. Update `project/requirements.md` with requested behavior and constraints.
+2. Compare it with `project/current_state.md`, and update `project/todo.md`.
+3. Make focused changes within the existing HTML/CSS/JS structure.
+4. Run the browser tests and relevant layout checks.
+5. Update state, TODO and verification records. Commit code and documentation together.
+
+Preserve public historical information; describe recent engagements only using approved generalized business contexts and responsibilities. Do not add identifiable client details or claim unverified outcomes. Ensure external tabs use `rel="noopener noreferrer"`. Publication and deployment require owner review; the redesign is prepared locally first.

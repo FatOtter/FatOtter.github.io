@@ -2,314 +2,124 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title data-en="Liyue Shen (Rex) · Personal Portfolio" data-zh="沈励钥（Rex）· 个人主页" data-ja="沈励钥（Rex）・個人ポートフォリオ">沈励钥（Rex）· 个人主页</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- 高可读无衬线 + 中文搭配 -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-  <!-- 开源图标 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <!-- 外部样式 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-zh="沈励钥 Rex｜数字化与智能化交付" data-en="Liyue Shen · Digital &amp; AI Delivery" data-ja="沈励钥 Rex｜デジタル・AI導入">沈励钥 Rex｜数字化与智能化交付</title>
+  <meta name="description" content="沈励钥（Rex），中航金网上海分公司交付总监。关注制造业本体、企业数据平台与智能体落地，连接技术、业务与团队交付。" data-meta-zh="沈励钥（Rex），中航金网上海分公司交付总监。关注制造业本体、企业数据平台与智能体落地，连接技术、业务与团队交付。" data-meta-en="Liyue Shen (Rex), Delivery Director, Shanghai Branch at 中航金网. Connecting enterprise ontology, data platforms and AI with business operations and delivery." data-meta-ja="沈励钥（Rex）、中航金网 上海支社デリバリーディレクター。製造業オントロジー、データ基盤、AIエージェントの導入を通じ、技術と業務をつなぐ。">
+  <meta name="theme-color" content="#fafafa">
+  <meta property="og:title" content="沈励钥 Rex｜数字化与智能化交付">
+  <meta property="og:description" content="沈励钥（Rex），中航金网上海分公司交付总监。关注制造业本体、企业数据平台与智能体落地，连接技术、业务与团队交付。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fatotter.github.io/">
+  <link rel="canonical" href="https://fatotter.github.io/">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/game.css">
+  <script src="script/app.js" defer></script>
 </head>
 <body>
-  <!-- Game Overlay -->
-  <div id="game-overlay">
-    <canvas id="game-canvas"></canvas>
-    <div class="game-ui-layer">
-      <div class="game-stat" id="score-weight">体重: 100斤</div>
-      <div class="game-stat" id="score-timer">60s</div>
-      <div class="game-stat" id="score-money">资金: ￥3000</div>
-    </div>
-    <div id="game-msg">
-      <div><i class="fa-solid fa-gamepad"></i> Rex 的需求接住大作战</div>
-      <div style="font-size:1rem; font-weight:400; margin:10px 0; color:#64748b">
-        接住项目需求变强(胖)，漏掉需求会扣钱变瘦！<br>
-        目标：活过60秒 或 达到200斤<br>
-        失败：资金归零
+  <a class="skip-link" href="#main"><span data-zh="跳至正文" data-en="Skip to content" data-ja="本文へ">跳至正文</span></a>
+  <header class="global-nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top">REX<span class="brand-dot">.</span></a>
+      <nav class="nav-links" aria-label="Sections">
+        <a class="" href="#expertise"><span data-zh="专长" data-en="Expertise" data-ja="専門領域">专长</span></a><a class="" href="#projects"><span data-zh="实践" data-en="Work" data-ja="実績">实践</span></a><a class="" href="#experience"><span data-zh="经历" data-en="Experience" data-ja="経歴">经历</span></a><a class="" href="#publications"><span data-zh="论文" data-en="Research" data-ja="研究">论文</span></a>
+      </nav>
+      <div class="nav-actions" role="group" aria-label="Language">
+        <button id="lang-zh" lang="zh-CN" type="button" aria-pressed="true">中</button>
+        <button id="lang-en" lang="en" type="button" aria-pressed="false">EN</button>
+        <button id="lang-ja" lang="ja" type="button" aria-pressed="false">日</button>
       </div>
-      <button id="game-start-btn">开始工作</button>
-    </div>
-  </div>
-
-  <!-- 全局导航 -->
-  <header class="global-nav" aria-label="Global Navigation">
-    <div class="nav-left">
-      <a href="#about" class="brand" data-en="Rex · Home" data-zh="Rex · 首页" data-ja="Rex · ホーム">Rex · 首页</a>
-    </div>
-    <nav class="nav-links" aria-label="Primary navigation">
-      <a href="#about" data-en="About" data-zh="关于我" data-ja="紹介" role="button" tabindex="0">关于我</a>
-      <a href="#projects" data-en="Projects" data-zh="项目" data-ja="プロジェクト" role="button" tabindex="0">项目</a>
-      <a href="#skills" data-en="Skills" data-zh="技能" data-ja="スキル" role="button" tabindex="0">技能</a>
-    </nav>
-    <div class="nav-actions">
-      <button id="lang-en" class="chip" type="button">English</button>
-      <button id="lang-zh" class="chip" type="button">中文</button>
-      <button id="lang-ja" class="chip" type="button">日本語</button>
+      <a class="nav-contact" href="#contact"><span data-zh="联系我" data-en="Let’s talk" data-ja="お問い合わせ">联系我</span></a>
     </div>
   </header>
-
-  <!-- 科技风装饰：渐变条带 -->
-  <div style="position:fixed; left:-120px; bottom:-120px; width:380px; height:380px; border-radius:50%;
-    background: radial-gradient(circle at 30% 30%, rgba(97,218,251,.35), rgba(97,218,251,0) 60%),
-                radial-gradient(circle at 70% 70%, rgba(167,139,250,.25), rgba(167,139,250,0) 65%);
-    filter: blur(26px); pointer-events:none; z-index:-1;"></div>
-
-  <div class="wrapper">
-    <!-- 顶部封面 -->
-    <section class="kv">
-      <div class="avatar" aria-label="Avatar"></div>
-      <div style="flex:1 1 auto">
-        <!-- 语言切换已移至全局导航 -->
-        <span class="chip" data-en="AI in Industry" data-zh="AI·智能制造" data-ja="AI・スマート製造"><i class="fa-solid fa-microchip"></i> AI·智能制造</span>
-        <h1 data-en="Liyue Shen (Rex)" data-zh="沈励钥（Rex）" data-ja="沈励钥（Rex）">沈励钥（Rex）</h1>
-        <div class="subtitle" data-en="Engineer · Business/Project Delivery · Data/Algorithm" data-zh="工程师 · 商业/项目交付 · 数据/算法" data-ja="エンジニア・ビジネス/プロジェクトデリバリー・データ/アルゴリズム">工程师 · 商业/项目交付 · 数据/算法</div>
-        <div class="foot" role="region" aria-label="Contact information">
-          <span><i class="fa-solid fa-phone" aria-hidden="true"></i> <a href="tel:+8618801734215">+86 188-0173-4215</a></span>
-          <span aria-hidden="true">·</span>
-          <a href="mailto:Narcy188@outlook.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Narcy188@outlook.com</a>
-          <span aria-hidden="true">·</span>
-          <a href="https://fatotter.github.io/" target="_blank" rel="noreferrer noopener"><i class="fa-solid fa-link" aria-hidden="true"></i> fatotter.github.io</a>
-          <span aria-hidden="true">·</span>
-          <a href="https://www.linkedin.com/in/liyue-shen-444132120/" target="_blank" rel="noreferrer noopener"><i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn</a>
-        </div>
+  <main id="main">
+    <section class="hero container" id="top" aria-labelledby="hero-title">
+      <p class="eyebrow">BUSINESS × TECHNOLOGY × DELIVERY</p>
+      <p class="hero-name" data-zh="沈励钥 / Rex" data-en="Liyue Shen / Rex" data-ja="沈励钥 / Rex">沈励钥 / Rex</p>
+      <h1 id="hero-title"><span data-zh="理解业务。" data-en="Understand the business." data-ja="業務を理解する。">理解业务。</span><br><span class="muted" data-zh="让智能落地。" data-en="Make intelligence work." data-ja="AIを現場の力に。">让智能落地。</span></h1>
+      <p class="hero-description" data-zh="数字化与智能化实践者。连接业务现场、技术方案与团队交付，让复杂的问题有清晰、可执行的答案。" data-en="Digital transformation and AI, grounded in practice. Connecting business operations, technical decisions and delivery teams to turn complex problems into actionable solutions." data-ja="デジタル化とAIの実践者。業務現場、技術判断、チームの実行力をつなぎ、複雑な課題を実行可能な解決策に変える。">数字化与智能化实践者。连接业务现场、技术方案与团队交付，让复杂的问题有清晰、可执行的答案。</p>
+      <div class="hero-actions"><a class="button" href="#projects"><span data-zh="探索项目实践" data-en="Explore my work" data-ja="実績を見る">探索项目实践</span><span aria-hidden="true">↗</span></a><a class="text-link" href="mailto:Narcy188@outlook.com"><span data-zh="聊聊你的业务" data-en="Let’s discuss your business" data-ja="業務の課題を話す">聊聊你的业务</span><span aria-hidden="true">↗</span></a></div>
+      <div class="hero-facts">
+        <div><strong data-zh="中航金网" data-en="中航金网" data-ja="中航金网">中航金网</strong><span data-zh="上海分公司 · 交付总监" data-en="Shanghai Branch · Delivery Director" data-ja="上海支社 · デリバリーディレクター">上海分公司 · 交付总监</span></div>
+        <div><strong>20–30</strong><span data-zh="人团队 · 多项目交付统筹" data-en="Team members · Multi-project delivery" data-ja="名のチーム · 複数案件の統括">人团队 · 多项目交付统筹</span></div>
+        <div><strong data-zh="业务 × 技术" data-en="Business × Technology" data-ja="業務 × 技術">业务 × 技术</strong><span data-zh="从需求判断到实施落地" data-en="From requirements to implementation" data-ja="要件の見極めから導入まで">从需求判断到实施落地</span></div>
       </div>
-      <!-- 顶部 actions 导航已合并为全局导航 -->
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="section" style="margin-top:18px">
-      <div class="sec-title">
-        <h2 data-en="About" data-zh="关于我" data-ja="紹介"><i class="fa-regular fa-user"></i> <span data-en="About" data-zh="关于我" data-ja="紹介">关于我</span></h2>
-        <div class="hint" data-en="Profile, Education, Experience" data-zh="个人简介、教育、经历" data-ja="プロフィール・学歴・職歴">个人简介、教育、经历</div>
-      </div>
-      <div class="two-col">
-        <div class="item">
-          <h3 data-en="Profile" data-zh="个人简介" data-ja="プロフィール">个人简介</h3>
-          <p style="margin:8px 0 0; color:var(--muted)">
-            <span data-en="Leverage solid technical background and extensive delivery experience to reduce communication costs, bridge technical and business teams, align cross-cultural teammates, and help grow individual capabilities."
-                  data-zh="希望能在新的岗位上，利用扎实的技术背景知识和丰富的项目实施经验，减少外部客户和内部团队的沟通成本，打通技术团队和业务团队之间的沟通障碍，让不同文化背景和工作习惯的同事在项目上形成合力，并培养团队成员的个人能力。"
-                  data-ja="新しい職務において、堅実な技術的バックグラウンドと豊富な導入経験を生かし、社内外のコミュニケーションコストを低減し、技術とビジネスの橋渡しを行い、異なる文化・働き方のメンバーを束ね、チーム能力の向上に貢献したい。">希望能在新的岗位上，利用扎实的技术背景知识和丰富的项目实施经验，减少外部客户和内部团队的沟通成本，打通技术团队和业务团队之间的沟通障碍，让不同文化背景和工作习惯的同事在项目上形成合力，并培养团队成员的个人能力。</span>
-          </p>
+    <section id="expertise" class="expertise dark" aria-labelledby="expertise-title">
+      <div class="container expertise-grid">
+        <div class="expertise-copy">
+          <p class="eyebrow">01 / EXPERTISE</p>
+          <h2 id="expertise-title"><span data-zh="从业务现场，" data-en="From the business floor," data-ja="業務の現場から、">从业务现场，</span><br><span data-zh="到可执行的系统。" data-en="to systems that deliver." data-ja="使えるシステムへ。">到可执行的系统。</span></h2>
+          <p class="section-intro" data-zh="先弄清问题，再选择技术。本体把业务对象、关系与规则组织起来；数据平台连接系统；智能体与算法服务于具体的工作。" data-en="Clarify the problem before choosing the technology. Ontology structures business objects, relationships and rules. Data platforms connect systems. Agents and algorithms support real work." data-ja="まず課題を明確にし、それから技術を選ぶ。オントロジーで業務の対象・関係・ルールを整理し、データ基盤でシステムをつなぎ、エージェントとアルゴリズムを実務に生かす。">先弄清问题，再选择技术。本体把业务对象、关系与规则组织起来；数据平台连接系统；智能体与算法服务于具体的工作。</p>
+          <div class="expertise-lines">
+            <div><h3 data-zh="业务建模" data-en="Business modeling" data-ja="業務モデリング">业务建模</h3><p data-zh="制造业本体 · 数据语义 · 业务规则" data-en="Manufacturing ontology · Data semantics · Business rules" data-ja="製造業オントロジー · データの意味 · 業務ルール">制造业本体 · 数据语义 · 业务规则</p></div>
+            <div><h3 data-zh="智能化实施" data-en="AI implementation" data-ja="AI導入">智能化实施</h3><p data-zh="智能体落地 · 排产排程 · 产能规划" data-en="Agent implementation · Scheduling · Capacity planning" data-ja="エージェント導入 · 生産スケジューリング · 能力計画">智能体落地 · 排产排程 · 产能规划</p></div>
+            <div><h3 data-zh="交付统筹" data-en="Delivery leadership" data-ja="デリバリー統括">交付统筹</h3><p data-zh="多项目管理 · 技术决策 · 团队协同" data-en="Portfolio oversight · Technical decisions · Team alignment" data-ja="複数案件の管理 · 技術判断 · チーム連携">多项目管理 · 技术决策 · 团队协同</p></div>
+          </div>
         </div>
-        <div class="item">
-          <h3 data-en="Education" data-zh="教育经历" data-ja="学歴">教育经历</h3>
-          <ul class="clean">
-            <li>
-              <div class="meta"><span data-en="2010.9 – 2014.7 · Fudan University · Bachelor" data-zh="2010.9 – 2014.7 · 复旦大学 · 本科" data-ja="2010.9 – 2014.7 · 復旦大学 · 学士">2010.9 – 2014.7 · 复旦大学 · 本科</span></div>
-              <span data-en="Communication Engineering" data-zh="通信工程专业" data-ja="通信工学">通信工程专业</span>
-            </li>
-            <li>
-              <div class="meta"><span data-en="2020.6 – 2022.7 · The University of Queensland · Master" data-zh="2020.6 – 2022.7 · 昆士兰大学 · 硕士" data-ja="2020.6 – 2022.7 · クイーンズランド大学 · 修士">2020.6 – 2022.7 · 昆士兰大学 · 硕士</span></div>
-              <span data-en="Information Technology (Privacy attacks & defenses in federated learning)" data-zh="信息技术（联邦学习范式下的隐私窥探与防御）" data-ja="情報技術（連合学習におけるプライバシー攻撃と防御）">信息技术（联邦学习范式下的隐私窥探与防御）</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="grid" style="margin-top:12px">
-        <div class="item">
-          <h3 data-en="Experience" data-zh="工作经历" data-ja="職務経歴">工作经历</h3>
-          <ul class="clean">
-            <li>
-              <strong>AvePoint</strong> · <span data-en="Business Analyst / Implementation Manager" data-zh="商业分析师/实施经理" data-ja="ビジネスアナリスト／導入マネージャー">商业分析师/实施经理</span>
-              <div class="meta"><span data-en="2013.12–2014.7 (Shanghai) Intern; 2014.7–2017.8 (Singapore)" data-zh="2013.12–2014.7（上海）实习；2014.7–2017.8（新加坡）" data-ja="2013.12–2014.7（上海）インターン；2014.7–2017.8（シンガポール）">2013.12–2014.7（上海）实习；2014.7–2017.8（新加坡）</span></div>
-              <span data-en="Competitive research; BI analysis on internal business data; delivery of Dynamics CRM/SharePoint/O365 solutions; requirements, agile delivery, UAT, and post-launch analytics."
-                    data-zh="竞争对手研究与企业内部业务数据的BI分析；负责微软 Dynamics CRM、SharePoint、O365 等 ToB 方案与实施；需求收集、敏捷交付、UAT、上线后数据分析。"
-                    data-ja="競合調査と社内業務データのBI分析。Microsoft Dynamics CRM／SharePoint／O365などのB2Bソリューションの提案・導入。要件定義、アジャイル開発、UAT、リリース後のデータ分析。">竞争对手研究与企业内部业务数据的BI分析；负责微软 Dynamics CRM、SharePoint、O365 等 ToB 方案与实施；需求收集、敏捷交付、UAT、上线后数据分析。</span>
-            </li>
-            <li>
-              <strong>Fuji Xerox</strong> · <span data-en="Business Analyst" data-zh="商业分析师" data-ja="ビジネスアナリスト">商业分析师</span>
-              <div class="meta"><span data-en="2017.9–2018.4" data-zh="2017.9–2018.4" data-ja="2017.9–2018.4">2017.9–2018.4</span></div>
-              <span data-en="Pre-sales solutioning; China-overseas coordination; software/labor outsourcing/device deployment proposals." data-zh="售前方案，中外团队沟通，软件/外包/设备部署方案设计。"
-                    data-ja="プリセールス提案、中国—海外の調整、ソフトウェア／人材アウトソーシング／機器導入の提案。">售前方案，中外团队沟通，软件/外包/设备部署方案设计。</span>
-            </li>
-            <li>
-              <strong>Trax</strong> · <span data-en="Implementation Manager / Data Specialist" data-zh="实施经理/数据专家" data-ja="導入マネージャー／データスペシャリスト">实施经理/数据专家</span>
-              <div class="meta"><span data-en="2018.4–2020.2" data-zh="2018.4–2020.2" data-ja="2018.4–2020.2">2018.4–2020.2</span></div>
-              <span data-en="Delivered retail CV/AI projects; BI configuration & development; market insight reporting." data-zh="零售图像识别项目落地，BI 配置与开发，市场洞察报告。"
-                    data-ja="小売向けCV/AI案件の導入、BI設定・開発、市場インサイトレポーティング。">零售图像识别项目落地，BI 配置与开发，市场洞察报告。</span>
-            </li>
-            <li>
-              <strong>上海飞机制造/商飞智能</strong> · <span data-en="PM / Algorithm Engineer / Solutions Manager" data-zh="项目经理/算法工程师/解决方案经理" data-ja="プロジェクトマネージャー／アルゴリズムエンジニア／ソリューションマネージャー">项目经理/算法工程师/解决方案经理</span>
-              <div class="meta"><span data-en="2022.7–Present (Dept. head, 10-person team)" data-zh="2022.7–至今（科室主任，10人团队）" data-ja="2022.7–現在（科室主任、10名チーム）">2022.7–至今（科室主任，10人团队）</span></div>
-              <span data-en="Pre-sales and project delivery across industrial AI/digitalization." data-zh="售前方案与项目实施，覆盖工业智能/数字化领域。"
-                    data-ja="産業AI・デジタル化領域におけるプリセールスとプロジェクト導入全般。">售前方案与项目实施，覆盖工业智能/数字化领域。</span>
-            </li>
-          </ul>
+        <div class="model-visual" role="img" aria-label="Business objects, ontology and applications" data-aria-zh="业务对象通过本体连接排程、产能与智能体应用的概念示意" data-aria-en="Concept: ontology connects business objects with scheduling, capacity and agent applications" data-aria-ja="概念図：業務オブジェクトをオントロジーで計画・能力・エージェントへつなぐ">
+          <div class="model-caption">BUSINESS, CONNECTED.</div>
+          <div class="model-inputs"><span><span data-zh="订单" data-en="Orders" data-ja="受注">订单</span></span><span><span data-zh="资源" data-en="Resources" data-ja="リソース">资源</span></span><span><span data-zh="流程" data-en="Processes" data-ja="プロセス">流程</span></span></div>
+          <div class="model-wires" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="model-core"><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><div><small>ONTOLOGY</small><strong data-zh="让数据有业务含义" data-en="Give data business meaning" data-ja="データに業務の意味を">让数据有业务含义</strong></div></div>
+          <div class="model-wires bottom" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="model-outputs"><span><span data-zh="排产排程" data-en="Scheduling" data-ja="生産計画">排产排程</span></span><span><span data-zh="产能规划" data-en="Capacity" data-ja="能力計画">产能规划</span></span><span><span data-zh="智能体" data-en="Agents" data-ja="エージェント">智能体</span></span></div>
+          <p class="model-note" data-zh="从业务语义，走向业务行动。" data-en="From business meaning to business action." data-ja="業務の意味から、業務の実行へ。">从业务语义，走向业务行动。</p>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="section" style="margin-top:18px">
-      <div class="sec-title">
-        <h2 data-en="Projects" data-zh="项目经验" data-ja="プロジェクト"><i class="fa-solid fa-diagram-project"></i> <span data-en="Projects" data-zh="项目经验" data-ja="プロジェクト">项目经验</span></h2>
-        <div class="hint" data-en="Selected projects across gov/retail/aviation/airport" data-zh="政务/零售/民机/机场等领域精选项目" data-ja="政府/小売/民間機/空港などの代表案件">政务/零售/民机/机场等领域精选项目</div>
-      </div>
-      <div class="grid">
-        <div class="item">
-          <h3><span data-en="Gov Social & Family Dev. System (Singapore)" data-zh="新加坡政府社会与家庭发展部业务系统" data-ja="シンガポール政府・社会家族開発省の業務システム">新加坡政府社会与家庭发展部业务系统</span></h3>
-          <div class="meta"><span data-en="150 person-years · 6 modules · 2200+ use cases · 2000+ pages documentation" data-zh="150人年；6大模块；2200+ Use Cases；2000+页英文文档" data-ja="150人年・6モジュール・2200件超のユースケース・2000ページ超の英文文書">150人年；6大模块；2200+ Use Cases；2000+页英文文档</span></div>
-          <span data-en="Full-cycle delivery from bidding, requirements, dev, UAT to post-launch analytics; in-depth analysis on youth welfare data." data-zh="负责从应标方案、需求收集、系统开发、UAT到售后支持的全流程；对青少年福利数据进行分析并形成报告。" data-ja="入札、要件定義、開発、UAT、リリース後の分析までの全工程を担当。青少年福祉データの詳細分析を実施。">负责从应标方案、需求收集、系统开发、UAT到售后支持的全流程；对青少年福利数据进行分析并形成报告。</span>
-          <div style="margin-top:8px">
-            <span class="badge">Dynamics CRM</span>
-            <span class="badge">SharePoint</span>
-            <span class="badge">O365</span>
-            <span class="badge">Agile</span>
-          </div>
-        </div>
-
-        <div class="item">
-          <h3><span data-en="Shell China CV-based Market Insights" data-zh="壳牌中国视觉识别市场洞察" data-ja="シェル中国：画像認識に基づく市場インサイト">壳牌中国视觉识别市场洞察</span></h3>
-          <div class="meta"><span data-en="Shanghai/Xi'an/Huizhou · Multi-dimensional dashboards & ML models" data-zh="上海/西安/惠州等地 · 多维报表与算法模型" data-ja="上海／西安／恵州など · 多次元ダッシュボードと機械学習モデル">上海/西安/惠州等地 · 多维报表与算法模型</span></div>
-          <span data-en="Coordinated survey data; built CV pipeline (ingest, train, infer, feedback); designed store scoring with ML-optimized parameters." data-zh="协调问卷数据，构建图像识别流程（获取、训练、识别、回传），并建立门店评分机制（机器学习最优参数）。" data-ja="アンケートデータの統合、画像認識パイプライン（取得・学習・推論・フィードバック）の構築、機械学習最適化パラメータによる店舗スコア設計。">协调问卷数据，构建图像识别流程（获取、训练、识别、回传），并建立门店评分机制（机器学习最优参数）。</span>
-          <div style="margin-top:8px">
-            <span class="badge">Computer Vision</span><span class="badge">ML</span><span class="badge">BI</span>
-          </div>
-        </div>
-
-        <div class="item">
-          <h3><span data-en="Intelligent Scheduling for Domestic Airliner" data-zh="某型号国产民机智能排产" data-ja="国産民間機のインテリジェント排程">某型号国产民机智能排产</span></h3>
-          <div class="meta"><span data-en="Python + Flask · GA/Simulation/MIP · Integrated MES/MOM" data-zh="Python + Flask · GA/仿真/整数规划 · 集成 MES/MOM" data-ja="Python + Flask・遺伝的アルゴリズム／シミュレーション／整数計画・MES/MOM統合">Python + Flask · GA/仿真/整数规划 · 集成 MES/MOM</span></div>
-          <span data-en="Modeled assembly constraints; proposed multiple algorithms and refactored code; delivered first industry-grade executable plan." data-zh="梳理装配约束与逻辑，提供多种算法策略并重构算法；落地首个行业级可执行生产计划。" data-ja="組立制約をモデル化し、複数のアルゴリズムを提案・コードをリファクタリング。業界水準の実行可能な生産計画を初納品。">梳理装配约束与逻辑，提供多种算法策略并重构算法；落地首个行业级可执行生产计划。</span>
-          <div style="margin-top:8px">
-            <span class="badge">Scheduling</span><span class="badge">Flask</span><span class="badge">MIP</span>
-          </div>
-        </div>
-
-        <div class="item">
-          <h3><span data-en="Prime Manufacturer Process Digitalization" data-zh="主制造商过程数字化" data-ja="主要製造メーカーのプロセスデジタル化">主制造商过程数字化</span></h3>
-          <div class="meta"><span data-en="Process board / value stream / data definition · Iterations & acceptance" data-zh="过程画板/价值流拆解/数据定义 · 迭代与验收" data-ja="プロセスボード／バリューストリーム分解／データ定義・反復・受入">过程画板/价值流拆解/数据定义 · 迭代与验收</span></div>
-          <span data-en="Modeling tool aligned with airworthiness compliance; led proposal, application, implementation and acceptance." data-zh="建模工具对接适航认证标准；作为项目经理推进立项、申报、实施、验收全流程。" data-ja="適航認証に準拠したモデリングツール。PMとして立案・申請・実装・受入まで一貫推進。">建模工具对接适航认证标准；作为项目经理推进立项、申报、实施、验收全流程。</span>
-          <div style="margin-top:8px">
-            <span class="badge">Process Modeling</span><span class="badge">Gov Compliance</span>
-          </div>
-        </div>
-
-        <div class="item">
-          <h3><span data-en="Digital Transformation of a Hub Airport Group" data-zh="某枢纽机场集团数字化转型" data-ja="ハブ空港グループのデジタルトランスフォーメーション">某枢纽机场集团数字化转型</span></h3>
-          <div class="meta"><span data-en="100+ person-years · Procurement & research · DES/Path simulation" data-zh="100+人年 · 采购与科研 · 离散事件/动线仿真" data-ja="100人年以上・調達と研究・離散事象／動線シミュレーション">100+人年 · 采购与科研 · 离散事件/动线仿真</span></div>
-          <span data-en="Led overall planning; coordinated multi-dept needs; designed functional/data architecture ensuring module collaboration." data-zh="牵头整体策划与推进；协调多部门需求，设计科研系统功能/数据架构，确保模块协同。" data-ja="全体計画のリード、多部門の調整、機能・データアーキテクチャの設計によりモジュール連携を実現。">牵头整体策划与推进；协调多部门需求，设计科研系统功能/数据架构，确保模块协同。</span>
-          <div style="margin-top:8px">
-            <span class="badge">Simulation</span><span class="badge">Aviation</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills" class="section" style="margin-top:18px">
-      <div class="sec-title">
-        <h2 data-en="Skills" data-zh="技能与资格" data-ja="スキルと資格"><i class="fa-solid fa-screwdriver-wrench"></i> <span data-en="Skills" data-zh="技能与资格" data-ja="スキルと資格">技能与资格</span></h2>
-        <div class="hint" data-en="Tech stack, tools, certifications and languages" data-zh="技术栈、工具、证书与语言" data-ja="技術スタック・ツール・資格・言語">技术栈、工具、证书与语言</div>
-      </div>
-      <div class="two-col">
-        <div>
-          <div class="item">
-            <h3><span data-en="Data & Engineering" data-zh="数据与工程" data-ja="データとエンジニアリング">数据与工程</span></h3>
-            <p class="meta"><span data-en="Python (numpy, torch, keras, matplotlib), R, Matlab; JS/jQuery/Bootstrap, Java (SpringBoot), PHP (CodeIgniter)" data-zh="Python（numpy、torch、keras、matplotlib）、R、Matlab；JS/jQuery/Bootstrap、Java（SpringBoot）、PHP（CodeIgniter）" data-ja="Python（numpy・torch・keras・matplotlib）、R、Matlab；JS/jQuery/Bootstrap、Java（SpringBoot）、PHP（CodeIgniter）">Python（numpy、torch、keras、matplotlib）、R、Matlab；JS/jQuery/Bootstrap、Java（SpringBoot）、PHP（CodeIgniter）</span></p>
-            <div>
-              <span class="badge">Python</span><span class="badge">PyTorch</span><span class="badge">Keras</span>
-              <span class="badge">Matplotlib</span><span class="badge">Java</span><span class="badge">SpringBoot</span>
-              <span class="badge">JavaScript</span><span class="badge">jQuery</span><span class="badge">Bootstrap</span>
-              <span class="badge">PHP</span><span class="badge">CodeIgniter</span>
-            </div>
-          </div>
-          <div class="item">
-            <h3><span data-en="Databases" data-zh="数据库" data-ja="データベース">数据库</span></h3>
-            <p class="meta"><span data-en="MySQL, Postgres, Hive" data-zh="MySQL、Postgres、Hive" data-ja="MySQL、Postgres、Hive">MySQL、Postgres、Hive</span></p>
-            <div>
-              <span class="badge">MySQL</span><span class="badge">Postgres</span><span class="badge">Hive</span>
-              <span class="badge">SQL</span>
-            </div>
-          </div>
-          <div class="item">
-            <h3><span data-en="Productivity" data-zh="工具" data-ja="生産性ツール">工具</span></h3>
-            <p class="meta"><span data-en="Office 365; Prototyping: Axure, Figma, Mastergo, Balsamiq, AI" data-zh="Office 365；原型工具：Axure、Figma、Mastergo、Balsamiq、AI" data-ja="Office 365；プロトタイピング：Axure、Figma、Mastergo、Balsamiq、AI">Office 365；原型工具：Axure、Figma、Mastergo、Balsamiq、AI</span></p>
-            <div>
-              <span class="badge">Office 365</span><span class="badge">Axure</span><span class="badge">Figma</span>
-              <span class="badge">Mastergo</span><span class="badge">Balsamiq</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="item">
-            <h3><span data-en="Certifications" data-zh="证书与方法" data-ja="資格と手法">证书与方法</span></h3>
-            <ul class="clean">
-              <li><span data-en="PMP (Project Management Professional)" data-zh="PMP（项目管理专业人士资格）" data-ja="PMP（プロジェクトマネジメント・プロフェッショナル）">PMP（项目管理专业人士资格）</span></li>
-              <li><span data-en="Agile methodologies, Lean Six Sigma" data-zh="敏捷开发理念、精益六西格玛" data-ja="アジャイル手法、リーン・シックス・シグマ">敏捷开发理念、精益六西格玛</span></li>
-            </ul>
-          </div>
-          <div class="item">
-            <h3><span data-en="Languages" data-zh="语言能力" data-ja="言語能力">语言能力</span></h3>
-            <ul class="clean">
-              <li><span data-en="English: working and business proficiency" data-zh="英语：工作语言，商务水平" data-ja="英語：業務での運用可、ビジネスレベル">英语：工作语言，商务水平</span></li>
-              <li><span data-en="Japanese: JLPT N2" data-zh="日语：N2" data-ja="日本語：JLPT N2">日语：N2</span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Publications -->
-    <section class="section" style="margin-top:18px">
-      <div class="sec-title">
-        <h2 data-en="Publications" data-zh="学术著作" data-ja="学術業績"><i class="fa-regular fa-file-lines"></i> 学术著作</h2>
-        <div class="hint" data-en="Federated learning: robustness, privacy and fairness" data-zh="联邦学习：鲁棒性、隐私与公平性" data-ja="連合学習：ロバスト性・プライバシー・公平性">联邦学习：鲁棒性、隐私与公平性</div>
-      </div>
-      <div class="pub">
-        Better together: Attaining the triad of byzantine-robust federated learning via local update amplification
-        <div class="meta">Shen, Liyue; Zhang, Yanjun; Wang, Jingwei; Bai, Guangdong; ACSAC 2022</div>
-      </div>
-      <div class="pub">
-        Agramplifier: Defending federated learning against poisoning attacks through local update amplification
-        <div class="meta">Gong, Zirui; Shen, Liyue; ...; TIFS 2023</div>
-      </div>
-      <div class="pub">
-        Privacy-preserving and fairness-aware federated learning for critical infrastructure protection and resilience
-        <div class="meta">Zhang, Yanjun; Sun, Ruoxi; Shen, Liyue; ...; The Web Conference 2024</div>
-      </div>
-      <div class="pub">
-        AgrEvader: Poisoning membership inference against Byzantine-robust federated learning
-        <div class="meta">Zhang, Yanjun; Bai, Guangdong; ...; The Web Conference 2023</div>
-      </div>
-    </section>
-
-    <!-- Chat -->
-    <section id="chat" class="section" style="margin-top:18px">
-      <div class="sec-title">
-        <h2 data-en="Chat" data-zh="聊天" data-ja="チャット"><i class="fa-regular fa-comments"></i> <span data-en="Chat" data-zh="聊天" data-ja="チャット">聊天</span></h2>
-        <div class="hint" data-en="Talk with me via backend proxy to Volcengine" data-zh="通过后端代理火山引擎与我聊天" data-ja="バックエンドのプロキシ経由で会話します">通过后端代理火山引擎与我聊天</div>
-      </div>
-      <div class="item">
-        <label for="chat-input" class="meta" data-en="Your message" data-zh="你的消息" data-ja="メッセージ">你的消息</label>
-        <textarea id="chat-input" rows="3" style="width:100%;margin:8px 0" placeholder="Type here..."></textarea>
-        <div style="display:flex;gap:8px;align-items:center">
-          <button id="chat-send" class="chip" type="button" data-en="Send" data-zh="发送" data-ja="送信">发送</button>
-          <button id="chat-clear" class="chip" type="button" data-en="Clear" data-zh="清空" data-ja="クリア">清空</button>
-          <span id="chat-status" class="meta" style="color:var(--muted)"></span>
-        </div>
-      </div>
-      <div class="item" style="margin-top:12px">
-        <h3 class="meta" data-en="Conversation" data-zh="对话" data-ja="会話">对话</h3>
-        <div id="chat-log" class="clean" style="display:flex;flex-direction:column;gap:8px"></div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="foot">
-      <!-- 底部 anchors 导航已移除，使用全局导航 -->
-      <div style="margin-left:auto">
-        <span class="meta">© Rex · 沈励钥</span>
-      </div>
-    </footer>
-  </div>
-
-  <!-- 外部脚本 -->
-  <script src="script/app.js"></script>
-  <script src="script/game.js"></script>
+    <section id="projects" class="section container" aria-labelledby="projects-title">
+      <div class="section-heading"><div><p class="eyebrow">02 / SELECTED WORK</p><h2 id="projects-title"><span data-zh="实践，是最好的说明。" data-en="Work speaks for itself." data-ja="実践が、何よりの証明。">实践，是最好的说明。</span></h2></div><span class="section-label" data-zh="近期聚焦" data-en="Current focus" data-ja="現在の取り組み">近期聚焦</span></div>
+      <div class="case-grid">
+<article class="case-card"><div class="case-top"><span class="case-number">01</span><span class="case-status" data-zh="实施推进" data-en="Implementation in progress" data-ja="導入推進中">实施推进</span></div><p class="case-category" data-zh="企业本体与数据平台" data-en="Enterprise ontology &amp; data" data-ja="企業オントロジーとデータ基盤">企业本体与数据平台</p><h3 data-zh="把分散的数据，组织成业务。" data-en="Turn fragmented data into business context." data-ja="分散するデータを、業務の文脈へ。">把分散的数据，组织成业务。</h3><p class="case-body" data-zh="围绕制造业业务对象、数据关系与使用场景，推进企业本体及数据平台的实施，连接业务理解与系统落地。" data-en="Implement enterprise ontology and data platforms around manufacturing objects, data relationships and use cases, connecting business understanding with working systems." data-ja="製造業の業務オブジェクト、データの関係、利用場面を軸に、企業オントロジーとデータ基盤の導入を推進する。">围绕制造业业务对象、数据关系与使用场景，推进企业本体及数据平台的实施，连接业务理解与系统落地。</p><div class="case-role"><span data-zh="实施负责人 · 需求梳理、关键方案判断与落地推进" data-en="Implementation lead · Requirements, key solution decisions and delivery" data-ja="導入責任者 · 要件整理、主要な方針判断、実装推進">实施负责人 · 需求梳理、关键方案判断与落地推进</span></div></article>
+<article class="case-card"><div class="case-top"><span class="case-number">02</span><span class="case-status" data-zh="前期实现经历" data-en="Early implementation experience" data-ja="初期実装の経験">前期实现经历</span></div><p class="case-category" data-zh="制造业数字孪生" data-en="Manufacturing digital twins" data-ja="製造業のデジタルツイン">制造业数字孪生</p><h3 data-zh="让数字表达，贴近业务现场。" data-en="Bring the digital model closer to operations." data-ja="デジタルの表現を、業務の現場へ。">让数字表达，贴近业务现场。</h3><p class="case-body" data-zh="负责前期数字孪生实现，围绕业务场景组织数字表达，并统筹技术实现与项目协同。" data-en="Led early-stage digital twin implementation, shaping the digital representation around business scenarios and coordinating technical delivery." data-ja="初期段階のデジタルツイン実装を担当。業務シナリオに沿ってデジタル表現を構成し、技術実装とプロジェクト連携を統括。">负责前期数字孪生实现，围绕业务场景组织数字表达，并统筹技术实现与项目协同。</p><div class="case-role"><span data-zh="前期实现负责人 · 方案判断与交付协调" data-en="Early implementation lead · Solution decisions and delivery coordination" data-ja="初期実装責任者 · 方針判断とデリバリー調整">前期实现负责人 · 方案判断与交付协调</span></div></article>
+<article class="case-card"><div class="case-top"><span class="case-number">03</span><span class="case-status" data-zh="当前工作方向" data-en="Current area of work" data-ja="現在の業務領域">当前工作方向</span></div><p class="case-category" data-zh="智能体与计划优化" data-en="Agents &amp; planning" data-ja="エージェントと計画最適化">智能体与计划优化</p><h3 data-zh="让技术，回答具体的问题。" data-en="Put technology to work on real problems." data-ja="技術で、具体的な課題に応える。">让技术，回答具体的问题。</h3><p class="case-body" data-zh="统筹智能体实施与制造业本体应用，围绕排产排程、产能规划等问题推动方案选择和实施路径判断。" data-en="Oversee agent implementation and manufacturing ontology applications, guiding solution choices and implementation paths for scheduling and capacity planning." data-ja="エージェント導入と製造業オントロジー活用を統括。生産スケジュールや能力計画の課題に対し、方式選定と導入方針を判断。">统筹智能体实施与制造业本体应用，围绕排产排程、产能规划等问题推动方案选择和实施路径判断。</p><div class="case-role"><span data-zh="交付统筹 · 多项目汇报、关键决策与团队协同" data-en="Delivery oversight · Project reviews, key decisions and team coordination" data-ja="デリバリー統括 · 案件報告、重要な判断、チーム連携">交付统筹 · 多项目汇报、关键决策与团队协同</span></div></article>
+</div>
+      <p class="case-disclosure" data-zh="近期案例仅呈现通用业务场景与职责，不披露客户及项目专有信息。" data-en="Recent work is described through general business contexts and responsibilities, without client or proprietary project information." data-ja="最近の案件は一般的な業務課題と担当範囲のみを記載し、顧客名や案件固有の情報は掲載していません。">近期案例仅呈现通用业务场景与职责，不披露客户及项目专有信息。</p>
+      <div class="previous-heading"><h3 data-zh="更多行业实践" data-en="Across industries" data-ja="業界を越えた経験">更多行业实践</h3><p data-zh="政务 · 零售 · 民机 · 机场" data-en="Public services · Retail · Aviation · Airports" data-ja="公共サービス · 小売 · 民間航空機 · 空港">政务 · 零售 · 民机 · 机场</p></div>
+      <div class="past-projects">
+<details class="past-project"><summary><span class="project-index">01</span><span class="project-summary"><strong data-zh="新加坡政府社会与家庭发展部业务系统" data-en="Singapore MSF business systems" data-ja="シンガポール社会・家庭開発省の業務システム">新加坡政府社会与家庭发展部业务系统</strong><span class="project-subtitle" data-zh="商务分析师" data-en="Business Analyst" data-ja="ビジネスアナリスト">商务分析师</span></span><span class="expand-icon" aria-hidden="true">+</span></summary><div class="project-detail"><p data-zh="基于微软生态推进社会福利业务信息化，参与从应标、需求到 UAT 和上线后支持的全过程。" data-en="Supported social-service digitalization on the Microsoft ecosystem, from bidding and requirements through UAT and post-launch support." data-ja="Microsoft基盤による社会福祉業務のデジタル化に参加。入札・要件定義からUAT・導入後支援まで担当。">基于微软生态推进社会福利业务信息化，参与从应标、需求到 UAT 和上线后支持的全过程。</p><p class="muted" data-zh="驻点两年四个月；负责交付 6 个主要模块，涉及 2,200+ Use Cases，撰写 2,000+ 页英文项目文档。整体项目规模约 150 人年。" data-en="On site for two years and four months; delivered six major modules covering 2,200+ use cases and wrote 2,000+ pages of English documentation. Overall project scope: approximately 150 person-years." data-ja="2年4か月の現地対応。主要6モジュール、2,200件超のユースケース、2,000ページ超の英文文書を担当。プロジェクト全体は約150人年。">驻点两年四个月；负责交付 6 个主要模块，涉及 2,200+ Use Cases，撰写 2,000+ 页英文项目文档。整体项目规模约 150 人年。</p></div></details>
+<details class="past-project"><summary><span class="project-index">02</span><span class="project-summary"><strong data-zh="壳牌中国视觉识别市场洞察" data-en="Shell China visual market insights" data-ja="シェル中国の画像認識による市場分析">壳牌中国视觉识别市场洞察</strong><span class="project-subtitle" data-zh="实施经理" data-en="Implementation Manager" data-ja="導入マネージャー">实施经理</span></span><span class="expand-icon" aria-hidden="true">+</span></summary><div class="project-detail"><p data-zh="将零售图像识别、问卷调研与数据分析结合，为市场洞察提供多维报表和门店评分。" data-en="Combined retail image recognition, survey data and analytics to support market insight with dashboards and store scoring." data-ja="小売画像認識、アンケート、データ分析を組み合わせ、市場把握のためのダッシュボードと店舗評価を構築。">将零售图像识别、问卷调研与数据分析结合，为市场洞察提供多维报表和门店评分。</p><p class="muted" data-zh="协调客户需求与调研数据，配置图像获取、模型训练和结果回传流程，使用机器学习优化门店评分模型。覆盖上海、西安、惠州等地，整体项目规模约 10 人年。" data-en="Coordinated requirements and survey data; configured image ingestion, model training and result delivery; applied machine learning to store scoring. Covered Shanghai, Xi’an and Huizhou, with an overall scope of approximately 10 person-years." data-ja="要件と調査データを調整し、画像取得・学習・結果返却を構成。機械学習による店舗評価を実施。上海・西安・恵州などを対象とし、全体は約10人年。">协调客户需求与调研数据，配置图像获取、模型训练和结果回传流程，使用机器学习优化门店评分模型。覆盖上海、西安、惠州等地，整体项目规模约 10 人年。</p></div></details>
+<details class="past-project"><summary><span class="project-index">03</span><span class="project-summary"><strong data-zh="某型号国产民机智能排产" data-en="Domestic airliner production scheduling" data-ja="国産民間機の生産スケジューリング">某型号国产民机智能排产</strong><span class="project-subtitle" data-zh="产品经理 / 算法工程师 / 项目经理" data-en="Product Manager / Algorithm Engineer / Project Manager" data-ja="プロダクト・アルゴリズム・プロジェクト担当">产品经理 / 算法工程师 / 项目经理</span></span><span class="expand-icon" aria-hidden="true">+</span></summary><div class="project-detail"><p data-zh="梳理装配现场的业务约束，结合算法服务与 MES/MOM 集成，推进可执行生产计划的落地。" data-en="Translated assembly-floor constraints into scheduling logic, combining algorithm services and MES/MOM integration to support executable production plans." data-ja="組立現場の制約を整理し、アルゴリズムとMES/MOM連携を通じて、実行可能な生産計画の導入を推進。">梳理装配现场的业务约束，结合算法服务与 MES/MOM 集成，推进可执行生产计划的落地。</p><p class="muted" data-zh="参与一线调研、原型设计与算法重构，探索遗传算法、仿真和整数规划等策略；以 Python / Flask 构建算法服务，并与业务用户校准计划逻辑。整体项目规模约 10 人年。" data-en="Worked on field research, prototypes and algorithm refactoring; explored genetic algorithms, simulation and integer programming. Built Python / Flask services and validated planning logic with users. Overall scope: approximately 10 person-years." data-ja="現場調査、プロトタイプ、アルゴリズム再構築を担当。遺伝的アルゴリズム・シミュレーション・整数計画を検討し、Python / Flaskのサービスと利用者によるロジック確認を実施。全体は約10人年。">参与一线调研、原型设计与算法重构，探索遗传算法、仿真和整数规划等策略；以 Python / Flask 构建算法服务，并与业务用户校准计划逻辑。整体项目规模约 10 人年。</p></div></details>
+<details class="past-project"><summary><span class="project-index">04</span><span class="project-summary"><strong data-zh="民机主制造商过程数字化" data-en="Aircraft manufacturer process digitalization" data-ja="民間機メーカーのプロセスデジタル化">民机主制造商过程数字化</strong><span class="project-subtitle" data-zh="产品经理 / 项目经理" data-en="Product Manager / Project Manager" data-ja="プロダクト・プロジェクトマネージャー">产品经理 / 项目经理</span></span><span class="expand-icon" aria-hidden="true">+</span></summary><div class="project-detail"><p data-zh="将过程制度与适航要求转化为结构化模型，围绕过程画板、价值流与数据定义开展系统设计。" data-en="Structured process policies and airworthiness requirements into models, designing process boards, value streams and data definitions." data-ja="業務規程と適航要件を構造化し、プロセスボード、バリューストリーム、データ定義を設計。">将过程制度与适航要求转化为结构化模型，围绕过程画板、价值流与数据定义开展系统设计。</p><p class="muted" data-zh="推进需求采集、立项申报、迭代交付和验收回款协调；引入迭代机制，规划版本并组织产研协作。整体项目规模约 80 人年。" data-en="Managed requirements, project initiation, iterative delivery and acceptance/payment coordination. Introduced release iterations and coordinated product and engineering work. Overall scope: approximately 80 person-years." data-ja="要件収集、立案・申請、反復型の導入、検収・支払い調整を推進。リリース計画と開発連携を組織。全体は約80人年。">推进需求采集、立项申报、迭代交付和验收回款协调；引入迭代机制，规划版本并组织产研协作。整体项目规模约 80 人年。</p></div></details>
+<details class="past-project"><summary><span class="project-index">05</span><span class="project-summary"><strong data-zh="民机主制造商三维业务展示" data-en="Aircraft manufacturer 3D business visualization" data-ja="民間機メーカーの3D業務可視化">民机主制造商三维业务展示</strong><span class="project-subtitle" data-zh="产品经理 / 项目经理" data-en="Product Manager / Project Manager" data-ja="プロダクト・プロジェクトマネージャー">产品经理 / 项目经理</span></span><span class="expand-icon" aria-hidden="true">+</span></summary><div class="project-detail"><p data-zh="围绕车间、物流和财务组织三维展示及配套业务流程，扩充 WMS、ERP 与 MOM 的业务能力。" data-en="Organized 3D visualization and supporting workflows across shop-floor, logistics and finance, extending WMS, ERP and MOM capabilities." data-ja="工場・物流・財務の3D表示と関連業務フローを構成し、WMS・ERP・MOMの業務機能を拡張。">围绕车间、物流和财务组织三维展示及配套业务流程，扩充 WMS、ERP 与 MOM 的业务能力。</p><p class="muted" data-zh="负责功能结构与原型设计、关键干系人协调、项目进度及立项验收推进，涉及成本穿透、差异处理和物料交接等业务。整体项目规模约 80 人年。" data-en="Managed functional structure, prototypes, stakeholder coordination, schedules and project approval/acceptance, covering cost analysis, variance handling and material handovers. Overall scope: approximately 80 person-years." data-ja="機能構成・プロトタイプ・関係者調整・進捗・承認と検収を担当。原価分析、差異処理、資材引渡しなどを対象。全体は約80人年。">负责功能结构与原型设计、关键干系人协调、项目进度及立项验收推进，涉及成本穿透、差异处理和物料交接等业务。整体项目规模约 80 人年。</p></div></details>
+<details class="past-project"><summary><span class="project-index">06</span><span class="project-summary"><strong data-zh="某枢纽机场集团数字化转型" data-en="Hub airport group digital transformation" data-ja="ハブ空港グループのデジタル化">某枢纽机场集团数字化转型</strong><span class="project-subtitle" data-zh="项目负责人" data-en="Project Lead" data-ja="プロジェクト責任者">项目负责人</span></span><span class="expand-icon" aria-hidden="true">+</span></summary><div class="project-detail"><p data-zh="牵头项目策划与多部门需求协调，统筹采购和科研范围，探索离散事件与动线仿真的业务应用。" data-en="Led project planning and cross-department requirements, aligning procurement and research scope and exploring discrete-event and movement simulation." data-ja="計画策定と部門間の要件調整を主導。調達・研究の範囲を整理し、離散事象・動線シミュレーションの業務適用を検討。">牵头项目策划与多部门需求协调，统筹采购和科研范围，探索离散事件与动线仿真的业务应用。</p><p class="muted" data-zh="开展业务调研、实施边界策划与立项申报，设计科研系统功能架构与数据架构。项目含两个采购子项及一个科研子项，整体规模不少于 100 人年。" data-en="Conducted business research, scope planning and project applications; designed functional and data architecture for the research system. Two procurement subprojects and one research subproject; overall scope of at least 100 person-years." data-ja="業務調査、範囲設定、申請を推進し、研究システムの機能・データ構造を設計。調達2件と研究1件で、全体は100人年以上。">开展业务调研、实施边界策划与立项申报，设计科研系统功能架构与数据架构。项目含两个采购子项及一个科研子项，整体规模不少于 100 人年。</p></div></details>
+</div></section>
+    <section id="experience" class="section soft" aria-labelledby="experience-title"><div class="container">
+      <div class="section-heading"><div><p class="eyebrow">03 / EXPERIENCE</p><h2 id="experience-title"><span data-zh="技术深度。交付视野。" data-en="Technical depth. Delivery perspective." data-ja="技術の深さ。実行の視野。">技术深度。交付视野。</span></h2></div></div>
+      <div class="experience-grid"><aside class="profile-panel">
+        <div class="portrait monogram" aria-hidden="true">LS<span>.</span></div>
+        <h3 data-zh="沈励钥" data-en="Liyue Shen" data-ja="沈励钥">沈励钥</h3><p class="profile-alias">Rex</p>
+        <p class="profile-statement" data-zh="在技术与业务之间，也在团队与客户之间。" data-en="Between technology and business. Between teams and clients." data-ja="技術と業務の間で。チームと顧客の間で。">在技术与业务之间，也在团队与客户之间。</p>
+        <p class="muted" data-zh="我的工作既包括关键项目的亲自推进，也包括对多项目交付的统筹：听取项目汇报、作出关键决策，让团队的技术能力对准客户的实际问题。" data-en="My work combines hands-on involvement in key projects with multi-project delivery oversight: reviewing progress, making key decisions and aligning team expertise with client needs." data-ja="重要案件を自ら推進するとともに、複数案件のデリバリーを統括。報告を受け、重要な判断を行い、チームの技術力を顧客の課題に結びつける。">我的工作既包括关键项目的亲自推进，也包括对多项目交付的统筹：听取项目汇报、作出关键决策，让团队的技术能力对准客户的实际问题。</p>
+        <a class="text-link" href="assets/resume.md"><span data-zh="完整履历（中文）" data-en="Full résumé (Chinese)" data-ja="経歴全文（中国語）">完整履历（中文）</span> <span aria-hidden="true">↗</span></a>
+      </aside><div class="timeline">
+<article class="timeline-item"><p class="timeline-date">2025.10 — <span data-zh="至今" data-en="Present" data-ja="現在">至今</span></p><h3 data-zh="中航金网" data-en="中航金网" data-ja="中航金网">中航金网</h3><p class="timeline-role" data-zh="上海分公司 · 交付总监" data-en="Shanghai Branch · Delivery Director" data-ja="上海支社 · デリバリーディレクター">上海分公司 · 交付总监</p><p class="muted" data-zh="带领 20–30 人团队，统筹多项目交付、关键决策与协作；重点推进企业本体及数据平台实施、制造业数字孪生与智能化应用。" data-en="Lead a team of 20–30, overseeing multiple projects, key decisions and coordination. Focus on enterprise ontology and data platforms, manufacturing digital twins and AI applications." data-ja="20〜30名のチームを率い、複数案件のデリバリー、主要な判断と連携を統括。企業オントロジー、データ基盤、製造業デジタルツイン、AI活用を推進。">带领 20–30 人团队，统筹多项目交付、关键决策与协作；重点推进企业本体及数据平台实施、制造业数字孪生与智能化应用。</p></article>
+<article class="timeline-item"><p class="timeline-date">2022.07 — 2025.09</p><h3 data-zh="上海飞机制造 / 商飞智能" data-en="Shanghai Aircraft Manufacturing / COMAC Intelligent Technology" data-ja="上海飛機製造 / 商飛智能">上海飞机制造 / 商飞智能</h3><p class="timeline-role" data-zh="项目经理 · 算法工程师 · 解决方案经理" data-en="Project Manager · Algorithm Engineer · Solutions Manager" data-ja="プロジェクトマネージャー · アルゴリズムエンジニア · ソリューションマネージャー">项目经理 · 算法工程师 · 解决方案经理</p><p class="muted" data-zh="围绕民机制造与机场业务推进智能排产、过程数字化和三维业务展示，承担方案设计、算法及产品工作，并推进项目立项、实施与验收。" data-en="Delivered scheduling, process digitalization and 3D business visualization for aircraft manufacturing and airport operations, spanning solutions, algorithms, product work and project implementation." data-ja="民間機製造・空港業務における生産計画、プロセスデジタル化、3D業務表示を推進。提案、アルゴリズム、プロダクト業務から立案・導入・検収まで担当。">围绕民机制造与机场业务推进智能排产、过程数字化和三维业务展示，承担方案设计、算法及产品工作，并推进项目立项、实施与验收。</p></article>
+<article class="timeline-item"><p class="timeline-date">2018.04 — 2020.02</p><h3 data-zh="Trax" data-en="Trax" data-ja="Trax">Trax</h3><p class="timeline-role" data-zh="实施经理 / 数据专家" data-en="Implementation Manager / Data Specialist" data-ja="導入マネージャー / データスペシャリスト">实施经理 / 数据专家</p><p class="muted" data-zh="推进零售图像识别项目，连接客户需求、系统实施与市场洞察，开展 BI 配置开发及数据分析。" data-en="Delivered retail image-recognition projects, connecting client needs with implementation, BI development, analytics and market insights." data-ja="小売画像認識プロジェクトを推進。顧客要件、システム導入、BI開発、分析、市場インサイトをつなぐ。">推进零售图像识别项目，连接客户需求、系统实施与市场洞察，开展 BI 配置开发及数据分析。</p></article>
+<article class="timeline-item"><p class="timeline-date">2017.09 — 2018.04</p><h3 data-zh="Fuji Xerox" data-en="Fuji Xerox" data-ja="Fuji Xerox">Fuji Xerox</h3><p class="timeline-role" data-zh="商业分析师" data-en="Business Analyst" data-ja="ビジネスアナリスト">商业分析师</p><p class="muted" data-zh="开展客户需求调研与售前方案设计，协调中国及海外团队，覆盖软件、外包服务与设备部署。" data-en="Researched customer needs and designed presales solutions across software, outsourced services and equipment, coordinating China and overseas teams." data-ja="顧客調査とプリセールス提案を担当。ソフトウェア、外部委託、機器導入を対象に、中国・海外チームを調整。">开展客户需求调研与售前方案设计，协调中国及海外团队，覆盖软件、外包服务与设备部署。</p></article>
+<article class="timeline-item"><p class="timeline-date">2013.12 — 2017.08</p><h3 data-zh="AvePoint" data-en="AvePoint" data-ja="AvePoint">AvePoint</h3><p class="timeline-role" data-zh="商业分析师 / 实施经理" data-en="Business Analyst / Implementation Manager" data-ja="ビジネスアナリスト / 導入マネージャー">商业分析师 / 实施经理</p><p class="muted" data-zh="由上海实习转入新加坡项目实施，负责微软生态企业解决方案，覆盖需求、敏捷开发、UAT 与上线后分析。2014 年 7 月起在新加坡工作。" data-en="Moved from a Shanghai internship to Singapore delivery in July 2014. Worked on Microsoft enterprise solutions across requirements, agile development, UAT and post-launch analytics." data-ja="上海でのインターンを経て、2014年7月からシンガポールで導入を担当。Microsoft企業向け基盤の要件、アジャイル開発、UAT、導入後分析を実施。">由上海实习转入新加坡项目实施，负责微软生态企业解决方案，覆盖需求、敏捷开发、UAT 与上线后分析。2014 年 7 月起在新加坡工作。</p></article>
+</div></div>
+    <div id="skills" class="foundations">
+      <div><h3 data-zh="教育背景" data-en="Education" data-ja="学歴">教育背景</h3><div class="education"><strong data-zh="昆士兰大学 · 信息技术硕士" data-en="University of Queensland · Master of IT" data-ja="クイーンズランド大学 · 情報技術修士">昆士兰大学 · 信息技术硕士</strong><span>2020.06–2022.07</span><p data-zh="联邦学习中的隐私攻击与防御" data-en="Privacy attacks and defenses in federated learning" data-ja="連合学習におけるプライバシー攻撃と防御">联邦学习中的隐私攻击与防御</p></div><div class="education"><strong data-zh="复旦大学 · 通信工程本科" data-en="Fudan University · Bachelor in Communication Engineering" data-ja="復旦大学 · 通信工学学士">复旦大学 · 通信工程本科</strong><span>2010.09–2014.07</span></div></div>
+      <div><h3 data-zh="工程与分析" data-en="Engineering &amp; analytics" data-ja="エンジニアリングと分析">工程与分析</h3><p>Python · NumPy · PyTorch · Keras · Matplotlib<br>R · MATLAB · SQL · MySQL · PostgreSQL · Hive<br>JavaScript · jQuery · Bootstrap<br>Java / Spring Boot · PHP / CodeIgniter</p></div>
+      <div><h3 data-zh="方法与协作" data-en="Methods &amp; collaboration" data-ja="手法とコラボレーション">方法与协作</h3><p data-zh="PMP · 敏捷开发 · 精益六西格玛" data-en="PMP · Agile · Lean Six Sigma" data-ja="PMP · アジャイル · リーンシックスシグマ">PMP · 敏捷开发 · 精益六西格玛</p><p>Office 365 · Axure · Figma · MasterGo<br>Balsamiq · AI</p><p data-zh="英语：商务工作语言 · 日语：N2" data-en="English: business working proficiency · Japanese: JLPT N2" data-ja="英語：ビジネスレベル · 日本語：JLPT N2">英语：商务工作语言 · 日语：N2</p></div>
+    </div></div></section>
+    <section id="publications" class="section container" aria-labelledby="publications-title">
+      <div class="section-heading"><div><p class="eyebrow">04 / RESEARCH</p><h2 id="publications-title"><span data-zh="实践之外，保持深究。" data-en="Practice, backed by inquiry." data-ja="実践を支える、探究心。">实践之外，保持深究。</span></h2></div><p class="section-label" data-zh="联邦学习 · 鲁棒性 · 隐私 · 公平性" data-en="Federated learning · Robustness · Privacy · Fairness" data-ja="連合学習 · 頑健性 · プライバシー · 公平性">联邦学习 · 鲁棒性 · 隐私 · 公平性</p></div>
+      <div class="publications">
+<article class="publication"><span class="pub-venue">ACSAC 2022</span><div><h3 lang="en">Better together: Attaining the triad of byzantine-robust federated learning via local update amplification</h3><p class="pub-authors" lang="en">Shen, Liyue; Zhang, Yanjun; Wang, Jingwei; Bai, Guangdong;</p><a class="pub-scholar" href="https://scholar.google.com/scholar?hl=en&amp;q=%22Better+together%3A+Attaining+the+triad+of+byzantine-robust+federated+learning+via+local+update+amplification%22" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar: Better together: Attaining the triad of byzantine-robust federated learning via local update amplification"><span data-zh="谷歌学术" data-en="Google Scholar" data-ja="Google Scholar">谷歌学术</span> <span aria-hidden="true">↗</span></a></div><span class="pub-index">01</span></article>
+<article class="publication"><span class="pub-venue">IEEE TIFS 2023</span><div><h3 lang="en">Agramplifier: Defending federated learning against poisoning attacks through local update amplification</h3><p class="pub-authors" lang="en">Gong, Zirui; Shen, Liyue; Zhang, Yanjun; Zhang, Leo Yu; Wang, Jingwei; Bai, Guangdong; Xiang, Yong;</p><a class="pub-scholar" href="https://scholar.google.com/scholar?hl=en&amp;q=%22Agramplifier%3A+Defending+federated+learning+against+poisoning+attacks+through+local+update+amplification%22" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar: Agramplifier: Defending federated learning against poisoning attacks through local update amplification"><span data-zh="谷歌学术" data-en="Google Scholar" data-ja="Google Scholar">谷歌学术</span> <span aria-hidden="true">↗</span></a></div><span class="pub-index">02</span></article>
+<article class="publication"><span class="pub-venue">The Web Conference 2024</span><div><h3 lang="en">Privacy-preserving and fairness-aware federated learning for critical infrastructure protection and resilience</h3><p class="pub-authors" lang="en">Zhang, Yanjun; Sun, Ruoxi; Shen, Liyue; Bai, Guangdong; Xue, Minhui; Meng, Mark Huasong; Li, Xue; Ko, Ryan; Nepal, Surya;</p><a class="pub-scholar" href="https://scholar.google.com/scholar?hl=en&amp;q=%22Privacy-preserving+and+fairness-aware+federated+learning+for+critical+infrastructure+protection+and+resilience%22" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar: Privacy-preserving and fairness-aware federated learning for critical infrastructure protection and resilience"><span data-zh="谷歌学术" data-en="Google Scholar" data-ja="Google Scholar">谷歌学术</span> <span aria-hidden="true">↗</span></a></div><span class="pub-index">03</span></article>
+<article class="publication"><span class="pub-venue">The Web Conference 2023</span><div><h3 lang="en">AgrEvader: Poisoning membership inference against Byzantine-robust federated learning</h3><p class="pub-authors" lang="en">Zhang, Yanjun; Bai, Guangdong; Chamikara, Mahawaga Arachchige Pathum; Ma, Mengyao; Shen, Liyue; Wang, Jingwei; Nepal, Surya; Xue, Minhui; Wang, Long; Liu, Joseph;</p><a class="pub-scholar" href="https://scholar.google.com/scholar?hl=en&amp;q=%22AgrEvader%3A+Poisoning+membership+inference+against+Byzantine-robust+federated+learning%22" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar: AgrEvader: Poisoning membership inference against Byzantine-robust federated learning"><span data-zh="谷歌学术" data-en="Google Scholar" data-ja="Google Scholar">谷歌学术</span> <span aria-hidden="true">↗</span></a></div><span class="pub-index">04</span></article>
+</div></section>
+    <section id="contact" class="contact dark" aria-labelledby="contact-title"><div class="container">
+      <p class="eyebrow">LET’S TALK</p><h2 id="contact-title"><span data-zh="从你的业务问题开始。" data-en="Start with your business challenge." data-ja="まず、業務の課題から。">从你的业务问题开始。</span></h2>
+      <p class="contact-intro" data-zh="关于数字化转型、智能化实施，或一个需要理清的复杂项目。" data-en="Digital transformation, AI implementation, or a complex project that needs a clear path forward." data-ja="デジタル変革、AI導入、あるいは進む道を明確にしたい複雑なプロジェクトについて。">关于数字化转型、智能化实施，或一个需要理清的复杂项目。</p>
+      <a class="contact-email" href="mailto:Narcy188@outlook.com">Narcy188@outlook.com <span aria-hidden="true">↗</span></a>
+      <div class="contact-links"><a class="" href="tel:+8618801734215">+86 188-0173-4215</a><a class="" href="https://www.linkedin.com/in/liyue-shen-444132120/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a class="" href="https://github.com/FatOtter" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a class="" href="assets/resume.md"><span data-zh="完整履历（中文）" data-en="Full résumé (Chinese)" data-ja="経歴全文（中国語）">完整履历（中文）</span> ↗</a></div>
+      <footer><span>© 2026 Rex / Liyue Shen</span><span data-zh="理解业务。让智能落地。" data-en="Understand the business. Make intelligence work." data-ja="業務を理解する。AIを現場の力に。">理解业务。让智能落地。</span></footer>
+    </div></section>
+  </main>
 </body>
 </html>
