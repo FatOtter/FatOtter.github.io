@@ -137,17 +137,21 @@ https://fatotter.github.io/
 	
 学术著作
 Better together: Attaining the triad of byzantine-robust federated learning via local update amplification
+[Google Scholar](https://scholar.google.com/scholar?hl=en&q=%22Better+together%3A+Attaining+the+triad+of+byzantine-robust+federated+learning+via+local+update+amplification%22)
 Shen, Liyue; Zhang, Yanjun; Wang, Jingwei; Bai, Guangdong; 
 Proceedings of the 38th Annual Computer Security Applications Conference，2022
 
 Agramplifier: Defending federated learning against poisoning attacks through local update amplification
+[Google Scholar](https://scholar.google.com/scholar?hl=en&q=%22Agramplifier%3A+Defending+federated+learning+against+poisoning+attacks+through+local+update+amplification%22)
 Gong, Zirui; Shen, Liyue; Zhang, Yanjun; Zhang, Leo Yu; Wang, Jingwei; Bai, Guangdong; Xiang, Yong; 
 IEEE Transactions on Information Forensics and Security，2023
 
 Privacy-preserving and fairness-aware federated learning for critical infrastructure protection and resilience
+[Google Scholar](https://scholar.google.com/scholar?hl=en&q=%22Privacy-preserving+and+fairness-aware+federated+learning+for+critical+infrastructure+protection+and+resilience%22)
 Zhang, Yanjun; Sun, Ruoxi; Shen, Liyue; Bai, Guangdong; Xue, Minhui; Meng, Mark Huasong; Li, Xue; Ko, Ryan; Nepal, Surya; 
 Proceedings of the ACM Web Conference, 2024
 
 AgrEvader: Poisoning membership inference against Byzantine-robust federated learning
+[Google Scholar](https://scholar.google.com/scholar?hl=en&q=%22AgrEvader%3A+Poisoning+membership+inference+against+Byzantine-robust+federated+learning%22)
 Zhang, Yanjun; Bai, Guangdong; Chamikara, Mahawaga Arachchige Pathum; Ma, Mengyao; Shen, Liyue; Wang, Jingwei; Nepal, Surya; Xue, Minhui; Wang, Long; Liu, Joseph; 
 Proceedings of the ACM Web Conference，2023

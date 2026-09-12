@@ -260,3 +260,6 @@ footer { border-top: 1px solid var(--dark-divider); display: flex; justify-conte
 }
 .monogram { display: flex; align-items: center; justify-content: center; background: var(--text); color: var(--card); font-size: 30px; font-weight: 600; letter-spacing: -.07em; }
 .monogram span { color: var(--dark-muted); }
+
+.pub-scholar { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; margin-top: 12px; min-height: 28px; border-bottom: 1px solid var(--divider); }
+.pub-scholar:hover { border-color: var(--primary); color: var(--primary-hover); }
